@@ -1,0 +1,5 @@
+<nav search_view="search">
+  <view name="Main" default="true" />	
+  <view name="search" />
+  <view name="dashboards" />
+</nav>
