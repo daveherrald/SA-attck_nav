@@ -16,11 +16,15 @@
     "domain": "mitre-enterprise",
 
     "custom_context_menu_items": [
-    {
-    "label": "SIMULATE",
-    "url": "technique_id=~Technique_ID~&technique_name=~Technique_Name~"
-    }
 
+    {
+        "label": "SIMULATE",
+        "url": "/splunkd/__raw/services/run_simulation?technique_id=~Technique_ID~&technique_name=~Technique_Name~"
+    },
+    {
+        "label": "Go To Google",
+        "url": "https://www.google.com"
+    }
     ],
 
     "default_layer": {
