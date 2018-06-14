@@ -2,11 +2,13 @@ import os
 import sys
 import json
 import traceback
+import splunk.rest as rest
 #just set up reference to our apps on-disk location explicitly
 #so we can import local libs as needed
 from splunk.clilib.bundle_paths import make_splunkhome_path
 assets_path = make_splunkhome_path(["etc", "apps", "SA-attck_nav","appserver","static","assets"])
 config_file = "/config.json"
+sw_reset_uri = "/servicesNS/nobody/SA-attck_nav/server/control/restart_webui_async"
 
 if sys.platform == "win32":
     import msvcrt
@@ -36,6 +38,7 @@ class ConfHandler(PersistentServerConnectionApplication):
         #in_string is a string...go figure
         #need to turn into dict to work with more easily
         in_string = json.loads(in_string)
+        session_key = in_string["session"]["authtoken"]
         try:
             #get command - simply returns the values w/in the config.json
             #
@@ -80,6 +83,16 @@ class ConfHandler(PersistentServerConnectionApplication):
                 config.truncate()
                 config.write(json.dumps(config_json))
                 config.close()
+
+                #try restarting splunkweb to refresh the cache
+                #Splunk REST class
+                #simpleRequest(path, sessionKey=None, getargs=None, postargs=None, method='GET', raiseAllErrors=False, proxyMode=False, rawResult=False, timeout=None, jsonargs=None)
+                getargs = {'output_mode': 'json', 'count': 0}
+                postargs = {}
+                response, content = rest.simpleRequest(sw_reset_uri, getargs=getargs,postargs=postargs, sessionKey=session_key,method='POST')
+                parsed_content = json.loads(content)
+
+
                 return {'payload': {"success" : "configuration file updated"} ,  # Payload of the request.
                 'status': 200          # HTTP status code
                 }
