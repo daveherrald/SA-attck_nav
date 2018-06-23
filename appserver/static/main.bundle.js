@@ -437,7 +437,7 @@ var DataService = (function () {
         this.enterpriseAttackURL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json";
         this.pre_attack_URL = "https://raw.githubusercontent.com/mitre/cti/master/pre-attack/pre-attack.json";
         this.mobileDataURL = "https://raw.githubusercontent.com/mitre/cti/master/mobile-attack/mobile-attack.json";
-        this.tacticsURL = "./assets/tacticsData.json";
+        this.tacticsURL = "assets/tacticsData.json";
         this.useTAXIIServer = false;
         this.taxiiURL = '';
         this.taxiiCollections = [];
@@ -454,7 +454,8 @@ var DataService = (function () {
     DataService.prototype.retreiveConfig = function (refresh) {
         if (refresh === void 0) { refresh = false; }
         if (refresh || !this.configData$) {
-            this.configData$ = this.http.get("./assets/config.json").map(function (res) { return res.json(); });
+            console.log("********* GET CONFIG DATA ***********");
+            this.configData$ = this.http.get("/splunkd/__raw/services/app_config").map(function (res) { return res.json(); });
         }
         return this.configData$;
     };
@@ -473,8 +474,6 @@ var DataService = (function () {
                 'media_types': ['application/vnd.oasis.stix+json']
             };
             var enterpriseCollection = new __WEBPACK_IMPORTED_MODULE_4__taxii2lib__["a" /* Collection */](enterpriseCollectionInfo, this.taxiiURL + 'stix', conn);
-            console.log("enterprise collection info");
-            console.log(enterpriseCollection);
             var preattackCollectionInfo = {
                 'id': this.taxiiCollections['pre_attack'],
                 'title': 'Pre-ATT&CK',
@@ -531,7 +530,6 @@ var DataService = (function () {
         return this.tacticData$; //observable
     };
     DataService.prototype.setTacticOrder = function (retrievedTactics) {
-        //these are the tactics as listed in the assets diretory json blob
         for (var i = 0; i < retrievedTactics.length; i++) {
             var phase = retrievedTactics[i].phase;
             var tactic = retrievedTactics[i].tactic;
@@ -550,8 +548,6 @@ var DataService = (function () {
      * @return {object}              object with keys of each tactic and values of the techniques of those tactics
      */
     DataService.prototype.techniquesToTactics = function (techniques) {
-        console.log("techniques list");
-        console.log(techniques);
         if (techniques.length === 0)
             return [];
         var tactics = {};
@@ -716,10 +712,6 @@ var DataTableComponent = (function () {
                 _this.constructTacticList(tactics, domain);
                 if (domain === "mitre-enterprise") {
                     dataService.getEnterpriseData(false, config["taxii_server"]["enabled"]).subscribe(function (enterpriseData) {
-                        //kchamp - look at this a bit later!
-                        //enterpriseData[0] is what we see in the other proj at mitre-ent.json
-                        console.log("enterprise data from data-table component");
-                        console.log(enterpriseData[0]["objects"]);
                         var objects = enterpriseData[1]["objects"].concat(enterpriseData[0]["objects"]);
                         _this.establishData(objects);
                     });

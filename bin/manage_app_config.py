@@ -8,7 +8,6 @@ import splunk.rest as rest
 from splunk.clilib.bundle_paths import make_splunkhome_path
 assets_path = make_splunkhome_path(["etc", "apps", "SA-attck_nav","appserver","static","assets"])
 config_file = "/config.json"
-sw_reset_uri = "/servicesNS/nobody/SA-attck_nav/server/control/restart_webui_async"
 
 if sys.platform == "win32":
     import msvcrt
@@ -46,7 +45,7 @@ class ConfHandler(PersistentServerConnectionApplication):
                 config = open(assets_path+config_file,'r')
                 config_json = json.loads(config.read())
                 config.close()
-                return {'payload': config_json["custom_context_menu_items"] ,  # Payload of the request.
+                return {'payload': config_json,  # Payload of the request.
                         'status': 200          # HTTP status code
                 }
 
@@ -83,15 +82,6 @@ class ConfHandler(PersistentServerConnectionApplication):
                 config.truncate()
                 config.write(json.dumps(config_json))
                 config.close()
-
-                #try restarting splunkweb to refresh the cache
-                #Splunk REST class
-                #simpleRequest(path, sessionKey=None, getargs=None, postargs=None, method='GET', raiseAllErrors=False, proxyMode=False, rawResult=False, timeout=None, jsonargs=None)
-                getargs = {'output_mode': 'json', 'count': 0}
-                postargs = {}
-                response, content = rest.simpleRequest(sw_reset_uri, getargs=getargs,postargs=postargs, sessionKey=session_key,method='POST')
-                parsed_content = json.loads(content)
-
 
                 return {'payload': {"success" : "configuration file updated"} ,  # Payload of the request.
                 'status': 200          # HTTP status code
