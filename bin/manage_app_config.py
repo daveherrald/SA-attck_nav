@@ -83,7 +83,7 @@ class ConfHandler(PersistentServerConnectionApplication):
                 config.write(json.dumps(config_json))
                 config.close()
 
-                return {'payload': {"success" : "configuration file updated"} ,  # Payload of the request.
+                return {'payload': {'success' : 'configuration file updated'} ,  # Payload of the request.
                 'status': 200          # HTTP status code
                 }
 

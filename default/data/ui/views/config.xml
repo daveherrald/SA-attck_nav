@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="SA-attck_nav:/templates/config.html" type="html">
+	<label>Config</label>
+</view>
