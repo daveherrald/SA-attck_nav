@@ -793,7 +793,7 @@ var DataService = /** @class */ (function () {
         if (refresh === void 0) { refresh = false; }
         if (refresh || !this.configData$) {
             console.log("********* GET CONFIG DATA ***********");
-            this.configData$ = this.http.get("http://localhost:8000/en-US/splunkd/__raw/services/attck/app_config").map(function (res) { return res.json(); });
+            this.configData$ = this.http.get("./assets/config.json").map(function (res) { return res.json(); });
         }
         return this.configData$;
     };
