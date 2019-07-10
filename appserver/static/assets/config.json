@@ -15,12 +15,12 @@
     "domain": "mitre-enterprise",
 
     "custom_context_menu_items": [
-
+        {"label": "run test", "url": "/app/SA-advsim/simulation_runner?form.tech_name=~Technique_Name~&form.test_id=~Technique_ID~"}
     ],
 
     "default_layers": {
-        "enabled": false,
-        "urls": ["assets/example.json", "https://raw.githubusercontent.com/mitre-attack/attack-navigator/master/layers/data/samples/Bear_APT.json"]
+        "enabled": true,
+        "urls": ["https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/art_navigator_layer.json"]
     },
 
     "comment_color": "yellow",
