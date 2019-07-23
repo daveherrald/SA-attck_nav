@@ -20,7 +20,7 @@
 
     "default_layers": {
         "enabled": true,
-        "urls": ["/splunkd/__raw/servicesNS/Nobody/SA-attck_nav/storage/collections/data/attack_layers/master_layer"]
+        "urls": ["https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/art_navigator_layer.json"]
     },
 
     "comment_color": "yellow",
