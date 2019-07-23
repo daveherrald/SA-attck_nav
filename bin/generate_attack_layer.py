@@ -50,7 +50,9 @@ DOMAIN = "mitre-enterprise"
 COLLECTION_NAME = "attack_layers"
 COLLECTION_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers?output_mode=json".format(appname)
 MASTER_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers/master_layer?output_mode=json".format(appname)
-
+GREEN = "#0FFE00"
+RED = "#FF1700"
+PINK = "#FF00EC"
 
 
 
@@ -71,8 +73,8 @@ class genatklayerCommand(StreamingCommand):
     """
     atkfield = Option(
         doc='''
-        **Syntax:** **atkfield=***<field that stores att&ck id*
-        **Description:** The name of the field in your search results that has the att&ck id''',
+        **Syntax:** **atkfield=***<field that stores att&ck technique id>*
+        **Description:** The name of the field in your search results that has the att&ck technique id''',
         require=False, validate=None)
 
     name = Option(
@@ -157,19 +159,27 @@ class genatklayerCommand(StreamingCommand):
         if "error" in master_layer:
             raise Exception("Error retrieving layer. {}".format(str(master_layer['error'])))
 
-
+        # iterate through our search results
         for record in records:
-            # replace fieldname iterator with fieldname retireved from commmand line
+            # determine of the user specified a field to key off of for Technique ID
             if self.atkfield in record:
-                technique = {
-                "techniqueID": six.text_type(record[self.atkfield].decode("utf-8"))
-                }
-                self.layer_json['techniques'].append(technique)
-                record['attck'] = self.layer_json
-                record['master_layer'] = master_layer
-
+                for tech in master_layer['techniques']:
+                    if tech['techniqueID'] == six.text_type(record[self.atkfield].decode("utf-8")):
+                        if 'detected' in record:
+                            if six.text_type(record['detected'].decode("utf-8")) == "1":
+                                tech['color'] = GREEN
+                            elif six.text_type(record['detected'].decode("utf-8")) == "0":
+                                tech['color'] = RED
+                        else:
+                            tech['color'] = PINK
             else:
                 record['_raw'] = "Error no field with that name exists {}".format(self.atkfield)
             yield record
+        # post updated layer if all was successful
+        r, c = splunk.rest.simpleRequest(MASTER_URI, jsonargs=json.dumps(master_layer), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
+        if r.status == 200:
+            self.logger.debug('updated master layer successfully: {}'.format(json.loads(c)))
+        else:
+            self.logger.debug('error updating master layer successfully: {}'.format(json.loads(c)))
 
 dispatch(genatklayerCommand, sys.argv, sys.stdin, sys.stdout, __name__)
