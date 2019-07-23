@@ -36,15 +36,22 @@ styles in <div> tags, similar to Bootstrap's grid system.
       <div class="dashboard-header clearfix">
         <h2>ATT&amp;CK</h2>
       </div>
+      <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
                 <!-- attack stuff-->
                 <app-root></app-root>
+                <script type="text/javascript" src="/static/app/SA-attck_nav/polyfills.js"></script>
+                <script type="text/javascript" src="/static/app/SA-attck_nav/runtime.js"></script>
+                <script type="text/javascript" src="/static/app/SA-attck_nav/styles.js"></script>
+                <script type="text/javascript" src="/static/app/SA-attck_nav/scripts.js"></script>
+                <script type="text/javascript" src="/static/app/SA-attck_nav/vendor.js"></script>
+                <script type="text/javascript" src="/static/app/SA-attck_nav/main.js"></script>
 
      </div>
 
     <!--
 END LAYOUT
 -->
-<script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
+
 <script src="{{SPLUNKWEB_URL_PREFIX}}/config?autoload=1" crossorigin="use-credentials"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/build/simplexml/index.js"></script>
@@ -100,11 +107,6 @@ END LAYOUT
         pageLoading = false;
       });
     </script>
-        <script type="text/javascript" src="/static/app/SA-attck_nav/polyfills.js"></script>
-        <script type="text/javascript" src="/static/app/SA-attck_nav/runtime.js"></script>
-        <script type="text/javascript" src="/static/app/SA-attck_nav/styles.js"></script>
-        <script type="text/javascript" src="/static/app/SA-attck_nav/scripts.js"></script>
-        <script type="text/javascript" src="/static/app/SA-attck_nav/vendor.js"></script>
-        <script type="text/javascript" src="/static/app/SA-attck_nav/main.js"></script>
+
   </body>
 </html>
