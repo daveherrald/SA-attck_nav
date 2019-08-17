@@ -166,9 +166,10 @@ class genatklayerCommand(StreamingCommand):
             if self.atkfield in record:
                 # iterate through the techniques array in our layer file
                 # we also will set our layers "scores" values per technique ID 
-                # back to zero, or in a first run, create a 'score' key
+                # to zero if we dont have a value yet, otherwise, proceed
                 for tech in master_layer['techniques']:
-                    tech['score'] = 0
+                    if 'score' not in tech:
+                        tech['score'] = 0
                     # determine if we have a match in this case between
                     # a technique ID in our layer file and in our splunk record
                     if tech['techniqueID'] == six.text_type(record[self.atkfield].decode("utf-8")):
@@ -176,10 +177,10 @@ class genatklayerCommand(StreamingCommand):
                         # and if so, update the layer info to reflect that
                         if 'detected' in record:
                             if six.text_type(record['detected'].decode("utf-8")) == "1":
-                                tech['color'] = GREEN
+                                #tech['color'] = GREEN
                                 tech['score'] = tech['score'] + 1
                             elif six.text_type(record['detected'].decode("utf-8")) == "0":
-                                tech['color'] = RED
+                                #tech['color'] = RED
                                 tech['score'] = tech['score'] - 1
                         else:
                             tech['color'] = PINK
