@@ -161,6 +161,8 @@ class genatklayerCommand(StreamingCommand):
 
         # iterate through our search results
         for record in records:
+
+
             # determine if the user specified a field to key off of for Technique ID
             # and if so, proceed
             if self.atkfield in record:
@@ -172,7 +174,25 @@ class genatklayerCommand(StreamingCommand):
                         tech['score'] = 0
                     # determine if we have a match in this case between
                     # a technique ID in our layer file and in our splunk record
-                    if tech['techniqueID'] == six.text_type(record[self.atkfield].decode("utf-8")):
+                    # as well as check if our atkfiled is mv
+                    # case where it is an mvfield
+                    if(isinstance(record[self.atkfield],list)):
+                        for item in record[self.atkfield]:
+                            if tech['techniqueID'] == six.text_type(item.decode("utf-8")):
+                            # if there is a match, see if there's also a detected field in our splunk results
+                            # and if so, update the layer info to reflect that
+                                if 'detected' in record:
+                                    if six.text_type(record['detected'].decode("utf-8")) == "1":
+                                        #tech['color'] = GREEN
+                                        tech['score'] = tech['score'] + 1
+                                    elif six.text_type(record['detected'].decode("utf-8")) == "0":
+                                        #tech['color'] = RED
+                                        tech['score'] = tech['score'] - 1
+                                else:
+                                    tech['color'] = PINK
+                                
+                    #case where it is not an mv field
+                    elif tech['techniqueID'] == six.text_type(record[self.atkfield].decode("utf-8")):
                         # if there is a match, see if there's also a detected field in our splunk results
                         # and if so, update the layer info to reflect that
                         if 'detected' in record:
