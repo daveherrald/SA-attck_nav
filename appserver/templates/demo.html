@@ -18,7 +18,7 @@ app_name = cherrypy.request.path_info.split('/')[3]
 
 <body>
 
-    <div id="main-component-container"></div>
+    <div id="main-component-container">
 
     <script src="${make_url('/config?autoload=1')}" crossorigin="use-credentials"></script>
     <script src="${make_url('/static/js/i18n.js')}"></script>
@@ -26,7 +26,6 @@ app_name = cherrypy.request.path_info.split('/')[3]
     <script>
         __splunkd_partials__ = ${json_decode(splunkd)};
     </script>
-
     <%
     page_path = "/static/app/" + app_name + "/pages/" + page + ".js"
     %>
@@ -34,17 +33,16 @@ app_name = cherrypy.request.path_info.split('/')[3]
     <script src="${make_url(page_path)}"></script>
 
     <div id="attack-container">
-
     <script type="text/javascript" src="/static/app/SA-attck_nav/polyfills.js"></script> 
     <script type="text/javascript" src="/static/app/SA-attck_nav/runtime.js"></script> 
     <script type="text/javascript" src="/static/app/SA-attck_nav/styles.js"></script> 
     <script type="text/javascript" src="/static/app/SA-attck_nav/scripts.js"></script> 
     <script type="text/javascript" src="/static/app/SA-attck_nav/vendor.js"></script> 
     <script type="text/javascript" src="/static/app/SA-attck_nav/main.js"></script> 
-    
 
     </div>
 
+    </div>
 
 
 
