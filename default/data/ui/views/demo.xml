@@ -1,6 +1,4 @@
 <?xml version="1.0"?>
 <view template="SA-attck_nav:/templates/demo.html" type="html">
-
-	<label>Demo</label>
-	<html> <app-root></app-root></html>
+	<html> <div>    <div>        <app-root></app-root></div></div></html>
 </view>
