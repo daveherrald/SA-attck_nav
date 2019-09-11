@@ -3,7 +3,7 @@
     "custom_context_menu_items": [
         {
             "label": "run test",
-            "url": "/app/SA-advsim/simulation_runner?form.tech_name=~Technique_Name~&form.test_id=~Technique_ID~"
+            "url": "/app/SA-attck_nav/simulation_runner?form.tech_name=~Technique_Name~&form.test_id=~Technique_ID~"
         },
         {
             "label": "view executor",
