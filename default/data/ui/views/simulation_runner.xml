@@ -1,0 +1,350 @@
+<form>
+  <label>Simulation Runner</label>
+  <description>Takes query parameters and runs a simulation</description>
+  <fieldset submitButton="true" autoRun="false">
+    <input type="text" token="tech_name" searchWhenChanged="false">
+      <label>Technique Name</label>
+    </input>
+    <input type="text" token="test_id">
+      <label>Technique ID</label>
+    </input>
+    <input type="text" token="playbook_name">
+      <label>Playbook Name</label>
+      <default>Modular Simulation</default>
+      <initialValue>Modular Simulation</initialValue>
+    </input>
+    <input type="dropdown" token="ph_srv">
+      <label>Phantom Server</label>
+      <fieldForLabel>custom_name</fieldForLabel>
+      <fieldForValue>phantom_server</fieldForValue>
+      <search>
+        <query>| rest /servicesNS/-/phantom/configs/conf-phantom/phantom | rex field=value "^\{\"(?&lt;phantom_server&gt;.*)\"\:\s{" | rex field=value "\"custom_name\": \"(?&lt;custom_name&gt;[^\"]*)\"" | table phantom_server, custom_name</query>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </search>
+      <choice value="NULL">NULL</choice>
+      <default>jxndnzdr</default>
+      <initialValue>jxndnzdr</initialValue>
+    </input>
+    <input type="dropdown" token="asset" searchWhenChanged="false">
+      <label>Asset</label>
+      <search>
+        <query>|inputlookup attck_assets</query>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>hostname</fieldForLabel>
+      <fieldForValue>hostname</fieldForValue>
+    </input>
+    <input type="dropdown" token="SSEdetectionSearch" searchWhenChanged="true">
+      <label>SSE Detection Search</label>
+      <search>
+        <query>| sseanalytics include_json=true
+| search hasSearch=Yes mitre_technique=$test_id$
+| spath input=summaries output=examples path=examples{}
+| mvexpand examples
+| spath input=examples output=example_type path=label
+| search example_type!="Demo Data"
+| spath input=examples output=search_strings path=showcase{}.value
+| table name, example_type, search_strings</query>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>name</fieldForLabel>
+      <fieldForValue>search_strings</fieldForValue>
+    </input>
+    <input type="dropdown" token="ESCUdetectionSearch" searchWhenChanged="true">
+      <label>ESCU Detection Search</label>
+      <fieldForLabel>action.escu.full_search_name</fieldForLabel>
+      <fieldForValue>search</fieldForValue>
+      <search>
+        <query>| rest /services/saved/searches | search action.escu.full_search_name=*ESCU* action.escu.search_type=detection | table action.escu.full_search_name, action.escu.mappings, action.escu.search_type, search</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+    <input type="dropdown" token="savedDetectionSearch" searchWhenChanged="true">
+      <label>Other Saved Search for Detection</label>
+      <fieldForLabel>title</fieldForLabel>
+      <fieldForValue>search</fieldForValue>
+      <search>
+        <query>| rest /services/saved/searches | search title!=*ESCU* AND title!=*DMC* AND title!=*instrumentation* AND title!=*CIM* AND title!=*Errors*| dedup title search | table title, description, search</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+    <input type="radio" token="detection_type" searchWhenChanged="true">
+      <label>Detection Type</label>
+      <choice value="sse">SSE Content</choice>
+      <choice value="escu">ESCU Content</choice>
+      <choice value="saved">Other Saved Searches</choice>
+      <initialValue>sse</initialValue>
+      <change>
+        <condition value="sse">
+          <set token="detectionSearch">$SSEdetectionSearch$</set>
+        </condition>
+        <condition value="escu">
+          <set token="detectionSearch">$ESCUdetectionSearch$</set>
+        </condition>
+        <condition value="saved">
+          <set token="detectionSearch">$savedDetectionSearch$</set>
+        </condition>
+      </change>
+    </input>
+    <input type="text" token="manual_command">
+      <label>Cmd.exe manual run</label>
+      <default>NA</default>
+      <initialValue>NA</initialValue>
+    </input>
+    <input type="text" token="manual_powershell">
+      <label>Powershell manual run</label>
+      <default>NA</default>
+      <initialValue>NA</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search id="AdvSim_test_event">
+          <finalized>
+            <set token="search_id">$result.info_sid$</set>
+            <set token="request_payload">$result.request_payload$</set>
+          </finalized>
+          <query>| inputlookup attck_assets | search hostname="$asset$"
+| addinfo
+| eval dest=ip_address
+| eval technique_name="$tech_name$"
+| eval manual_command="$manual_command$"
+| eval manual_powershell="$manual_powershell$"
+| eval action="$test_id$"
+| eval request_payload=tostring(random())
+| eval playbook_name="$playbook_name$"
+| eval phantom_server="$ph_srv$"
+| fields *
+| sendalert sendtophantom param.phantom_server="$ph_srv$" param.sensitivity="amber" param.severity="low" param.sensitivity="amber" param.severity="low"</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <fields>["hostname","action","dest","os","phantom_server","playbook_name","request_payload"]</fields>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$search_id$">
+      <table>
+        <title>Job Status</title>
+        <search>
+          <query>| rest /services/search/jobs/$search_id$/search.log | rex field=value "action=(?&lt;Run_Result&gt;.*exit code=\d{1,5})" | table Run_Result</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$request_payload$">
+      <title>Phantom POST-ed Events matching GUID</title>
+      <event>
+        <search>
+          <finalized>
+            <set token="group_earliest">$result.group_earliest$</set>
+            <set token="group_latest">$result.group_latest$</set>
+          </finalized>
+          <query>| search index=* sourcetype="advsim:atr" $request_payload$
+| addinfo
+| sort _time
+| stats earliest(_time) as group_earliest latest(_time) as group_latest</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="count">20</option>
+        <option name="list.drilldown">none</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">0</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.sortDirection">asc</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+      </event>
+    </panel>
+  </row>
+  <row>
+    <panel depends="detectionSearch">
+      <title>Detection Search Panel</title>
+      <input type="radio" token="search_hit" searchWhenChanged="true">
+        <label>Detection Search Fired?</label>
+        <choice value="1">Activity Detected</choice>
+        <choice value="0">Activity Not Detected</choice>
+      </input>
+      <html>
+        <p>
+          Use these radio buttons to select whether the detection search you selected at the top actually fired during the test time and detected the activity you were testing.  Selecting an option will update the MITRE ATT&amp;CK Nav display layer.
+        </p>
+      </html>
+      <table>
+        <title>$detectionSearch$</title>
+        <search>
+          <query>earliest=$group_earliest$ latest=$group_latest$ $detectionSearch$</query>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="group_earliest">
+      <title>Olaf Rule Detect Events</title>
+      <table>
+        <search>
+          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ RuleName=*$test_id$*
+| sort _time | table _time, EventCode, EventType, EventDescription, RuleName,</query>
+          <earliest>-1d@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="group_earliest">
+      <title>Sysmon Registry Events</title>
+      <table>
+        <search>
+          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" (EventCode=12 OR EventCode=13)
+| sort _time
+| table _time, EventCode, EventDescription, Details, object_path,</query>
+          <earliest>-1d@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="group_earliest">
+      <title>Decoded Powershell commands from events during test time</title>
+      <table>
+        <search>
+          <query>| search index=* host=$asset$ earliest=$group_earliest$ latest=$group_latest$ | sort _time | rex field=CommandLine "-encodedcommand (?&lt;payload&gt;\w+)"
+| search payload=*
+| eval new_payload = payload."===="
+| base64 action=decode field=new_payload
+| eval new_payload=replace(new_payload,"\\\x00","")
+| table new_payload</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="group_earliest">
+      <title>Cmd.exe commands from events during test time</title>
+      <table>
+        <search>
+          <query>| search index=* host=$asset$ earliest=$group_earliest$ latest=$group_latest$ parent_process=*cmd.exe* CommandLine!=*-encoded*
+| sort _time
+| table _time, parent_process, CommandLine</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="group_earliest">
+      <title>Sysmon File Create Events</title>
+      <table>
+        <search>
+          <query>index=* sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" host=$asset$ EventCode=11
+| sort _time
+| table _time, EventCode, EventDescription, TargetFilename, process_path,</query>
+          <earliest>$group_earliest$</earliest>
+          <latest>$group_latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="group_earliest">
+      <title>All Sysmon Events</title>
+      <event>
+        <search>
+          <query>index=* sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" host=$asset$ | fields + *</query>
+          <earliest>$group_earliest$</earliest>
+          <latest>$group_latest$</latest>
+        </search>
+        <option name="count">20</option>
+        <option name="list.drilldown">none</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">0</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.sortDirection">desc</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+      </event>
+    </panel>
+  </row>
+  <row>
+    <panel depends="search_hit">
+      <title>Update ATTCK Board</title>
+      <event>
+        <search>
+          <query>| makeresults 1 | eval technique="$test_id$" | eval detected=$search_hit$ | genatklayer atkfield=technique</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">5</option>
+        <option name="list.drilldown">none</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">0</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.sortDirection">desc</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+      </event>
+    </panel>
+  </row>
+</form>
