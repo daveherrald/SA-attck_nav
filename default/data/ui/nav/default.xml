@@ -1,8 +1,6 @@
 <nav search_view="search">
-  <view name="Main" default="true" />	
+  <view name="attack" default="true" />	
   <view name="simulation_runner" />
   <view name="search" />
-  <view name="dashboards" />
   <view name="config"/>
-  <view name="demo" />
 </nav>
