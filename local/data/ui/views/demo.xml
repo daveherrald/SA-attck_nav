@@ -1,0 +1,5 @@
+<dashboard script="polyfills.js, runtime.js, styles.js, scripts.js, vendor.js,nmain.js" >
+<panel>
+<html><app-root></app-root></html>
+</panel>
+</dashboard>
