@@ -170,8 +170,9 @@ class genatklayerCommand(StreamingCommand):
                 # we also will set our layers "scores" values per technique ID 
                 # to zero if we dont have a value yet, otherwise, proceed
                 for tech in master_layer['techniques']:
-                    if 'score' not in tech:
-                        tech['score'] = 0
+                    # Scoring example - reserving for later
+                    #if 'score' not in tech:
+                    #    tech['score'] = 0
                     # determine if we have a match in this case between
                     # a technique ID in our layer file and in our splunk record
                     # as well as check if our atkfiled is mv
