@@ -50,9 +50,13 @@ DOMAIN = "mitre-enterprise"
 COLLECTION_NAME = "attack_layers"
 COLLECTION_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers?output_mode=json".format(appname)
 MASTER_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers/master_layer?output_mode=json".format(appname)
-GREEN = "#0FFE00"
-RED = "#FF1700"
-PINK = "#FF00EC"
+RED_LT = "#FCA1A2" # -1 not detected
+YELLOW_DK = "#E6D60B" # 0 tested but not found
+BLUE_1 = "#C6DBEF" # 1 detected technique but no rule and no sub technique
+BLUE_2 = "#9ECAE1" # 2 detected technique and multiple sub techniques
+BLUE_3 = "#6BAED6" # 3 multiple sub tech and correlation search in place
+BLUE_4 = "#3182BD" # 4 highest confidence detection
+
 
 
 
@@ -151,8 +155,6 @@ class genatklayerCommand(StreamingCommand):
             for record in records:
                 record['_raw'] = json.dumps(resp)
                 yield record
-
-
         
         # attempt to get the master layer
         master_layer = self.getMasterLayer(MASTER_URI)
@@ -161,8 +163,6 @@ class genatklayerCommand(StreamingCommand):
 
         # iterate through our search results
         for record in records:
-
-
             # determine if the user specified a field to key off of for Technique ID
             # and if so, proceed
             if self.atkfield in record:
@@ -182,28 +182,39 @@ class genatklayerCommand(StreamingCommand):
                             # if there is a match, see if there's also a detected field in our splunk results
                             # and if so, update the layer info to reflect that
                                 if 'detected' in record:
-                                    if six.text_type(record['detected'].decode("utf-8")) == "1":
-                                        #tech['color'] = GREEN
-                                        tech['score'] = tech['score'] + 1
+                                    if six.text_type(record['detected'].decode("utf-8")) == "-1":
+                                        tech['color'] = RED_LT
+                                        #tech['score'] = tech['score'] + 1
                                     elif six.text_type(record['detected'].decode("utf-8")) == "0":
-                                        #tech['color'] = RED
-                                        tech['score'] = tech['score'] - 1
-                                else:
-                                    tech['color'] = PINK
+                                        tech['color'] = YELLOW_DK
+                                    elif six.text_type(record['detected'].decode("utf-8")) == "1":
+                                        tech['color'] = BLUE_1
+                                    elif six.text_type(record['detected'].decode("utf-8")) == "2":
+                                        tech['color'] = BLUE_2
+                                    elif six.text_type(record['detected'].decode("utf-8")) == "3":
+                                        tech['color'] = BLUE_3
+                                    elif six.text_type(record['detected'].decode("utf-8")) == "4":
+                                        tech['color'] = BLUE_4
+
                                 
                     #case where it is not an mv field
                     elif tech['techniqueID'] == six.text_type(record[self.atkfield].decode("utf-8")):
                         # if there is a match, see if there's also a detected field in our splunk results
                         # and if so, update the layer info to reflect that
                         if 'detected' in record:
-                            if six.text_type(record['detected'].decode("utf-8")) == "1":
-                                #tech['color'] = GREEN
-                                tech['score'] = tech['score'] + 1
+                            if six.text_type(record['detected'].decode("utf-8")) == "-1":
+                                tech['color'] = RED_LT
+                                #tech['score'] = tech['score'] + 1
                             elif six.text_type(record['detected'].decode("utf-8")) == "0":
-                                #tech['color'] = RED
-                                tech['score'] = tech['score'] - 1
-                        else:
-                            tech['color'] = PINK
+                                tech['color'] = YELLOW_DK
+                            elif six.text_type(record['detected'].decode("utf-8")) == "1":
+                                tech['color'] = BLUE_1
+                            elif six.text_type(record['detected'].decode("utf-8")) == "2":
+                                tech['color'] = BLUE_2
+                            elif six.text_type(record['detected'].decode("utf-8")) == "3":
+                                tech['color'] = BLUE_3
+                            elif six.text_type(record['detected'].decode("utf-8")) == "4":
+                                tech['color'] = BLUE_4
             else:
                 record['_raw'] = "Error no field with that name exists {}".format(self.atkfield)
             yield record
