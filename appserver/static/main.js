@@ -1029,6 +1029,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! is_js */ "./node_modules/is_js/is.js");
 /* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(is_js__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var rxjs_Observable__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/Observable */ "./node_modules/rxjs-compat/_esm5/Observable.js");
+/* harmony import */ var tinycolor2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tinycolor2 */ "./node_modules/tinycolor2/tinycolor.js");
+/* harmony import */ var tinycolor2__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(tinycolor2__WEBPACK_IMPORTED_MODULE_10__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1038,6 +1040,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1384,12 +1387,12 @@ var DataTableComponent = /** @class */ (function () {
                         if (tvm.enabled) {
                             if (tvm.color) { //manually assigned
                                 cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF' + tvm.color.substring(1) } };
-                                cell.font = { color: { 'argb': 'FF' + tinycolor.mostReadable(tvm.color, ["white", "black"]).toHex() } };
+                                cell.font = { color: { 'argb': 'FF' + tinycolor2__WEBPACK_IMPORTED_MODULE_10__["mostReadable"](tvm.color, ["white", "black"]).toHex() } };
                                 console.log(cell.font);
                             }
                             else if (tvm.score) { //score assigned
                                 cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF' + tvm.scoreColor.toHex() } };
-                                cell.font = { color: { 'argb': 'FF' + tinycolor.mostReadable(tvm.scoreColor, ["white", "black"]).toHex() } };
+                                cell.font = { color: { 'argb': 'FF' + tinycolor2__WEBPACK_IMPORTED_MODULE_10__["mostReadable"](tvm.scoreColor, ["white", "black"]).toHex() } };
                             }
                         }
                         else { //disabled
@@ -1411,7 +1414,7 @@ var DataTableComponent = /** @class */ (function () {
         //tactic background
         if (this.viewModel.showTacticRowBackground) {
             worksheet.getRow(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { 'argb': 'FF' + this.viewModel.tacticRowBackground.substring(1) } };
-            worksheet.getRow(1).font = { bold: true, color: { "argb": 'FF' + tinycolor.mostReadable(this.viewModel.tacticRowBackground, ["white", "black"]).toHex() } };
+            worksheet.getRow(1).font = { bold: true, color: { "argb": 'FF' + tinycolor2__WEBPACK_IMPORTED_MODULE_10__["mostReadable"](this.viewModel.tacticRowBackground, ["white", "black"]).toHex() } };
         }
         else {
             worksheet.getRow(1).font = { bold: true }; //bold header
@@ -1946,9 +1949,9 @@ var DataTableComponent = /** @class */ (function () {
         if (this.viewModel.highlightedTechnique && this.viewModel.highlightedTechnique.technique_tactic_union_id == technique.technique_tactic_union_id)
             return "black";
         if (tvm.color)
-            return tinycolor.mostReadable(tvm.color, ["white", "black"]);
+            return tinycolor2__WEBPACK_IMPORTED_MODULE_10__["mostReadable"](tvm.color, ["white", "black"]);
         if (tvm.score && !isNaN(Number(tvm.score)))
-            return tinycolor.mostReadable(tvm.scoreColor, ["white", "black"]);
+            return tinycolor2__WEBPACK_IMPORTED_MODULE_10__["mostReadable"](tvm.scoreColor, ["white", "black"]);
         if (antihighlight)
             return "#aaaaaa";
         else
@@ -1958,7 +1961,7 @@ var DataTableComponent = /** @class */ (function () {
         if (!this.viewModel.showTacticRowBackground)
             return 'black';
         else
-            return tinycolor.mostReadable(this.viewModel.tacticRowBackground, ['white', 'black']);
+            return tinycolor2__WEBPACK_IMPORTED_MODULE_10__["mostReadable"](this.viewModel.tacticRowBackground, ['white', 'black']);
     };
     /**
      * Is score input valid number
@@ -4258,9 +4261,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-//declare var tinygradient: any; //use tinygradient
 
-//declare var tinycolor: any; //use tinycolor2
 
  //global variables
 var ViewModelsService = /** @class */ (function () {
@@ -4550,7 +4551,7 @@ var Gradient = /** @class */ (function () {
         this.presets[preset].forEach(function (gcolor) {
             colorarray.push(gcolor.color);
         });
-        return tinygradient__WEBPACK_IMPORTED_MODULE_2__(colorarray).css('linear', 'to right');
+        return tinygradient2(colorarray).css('linear', 'to right');
     };
     /**
      * set this gradient to use the preset
