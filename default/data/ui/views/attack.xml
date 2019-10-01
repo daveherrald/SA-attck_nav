@@ -1,4 +1,3 @@
 <?xml version="1.0"?>
 <view template="SA-attck_nav:/templates/attack.html" type="html">
-	<html> <app-root></app-root></html>
 </view>
