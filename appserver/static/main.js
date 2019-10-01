@@ -1844,8 +1844,11 @@ var DataTableComponent = /** @class */ (function () {
      */
     DataTableComponent.prototype.onMouseMove = function (event) {
         var element = document.getElementById("tooltip" + this.viewModel.uid);
-        var tooltipDirectionHorizontal = document.body.clientWidth - event.pageX < 150; //determine facing of tooltip
-        var tooltipDirectionVertical = document.body.clientHeight - event.pageY < 350; //determine facing of tooltip
+        //let tooltipDirectionHorizontal = document.body.clientWidth - event.pageX < 150; //determine facing of tooltip
+        //let tooltipDirectionVertical = document.body.clientHeight - event.pageY < 350; //determine facing of tooltip
+        // updating to use window versus document.body for cases where the attack nav is inside another element
+        var tooltipDirectionHorizontal = window.innerWidth - event.pageX < 150; //determine facing of tooltip
+        var tooltipDirectionVertical = window.innerHeight - event.pageY < 350; //determine facing of tooltip
         if (this.viewModel.highlightedTechnique !== null && event.type == "mousemove") {
             element.style.left = tooltipDirectionHorizontal ? (event.pageX - 20 - element.clientWidth) + "px" : (event.pageX + 20) + "px";
             element.style.top = tooltipDirectionVertical ? (event.pageY - element.clientHeight) + "px" : event.pageY + "px";
@@ -4239,7 +4242,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Metadata", function() { return Metadata; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.service */ "./src/app/data.service.ts");
-/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./globals */ "./src/app/globals.ts");
+/* harmony import */ var tinygradient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tinygradient */ "./node_modules/tinygradient/tinygradient.js");
+/* harmony import */ var tinygradient__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(tinygradient__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var tinycolor2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tinycolor2 */ "./node_modules/tinycolor2/tinycolor.js");
+/* harmony import */ var tinycolor2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(tinycolor2__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./globals */ "./src/app/globals.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4250,6 +4257,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+//declare var tinygradient: any; //use tinygradient
+
+//declare var tinycolor: any; //use tinycolor2
 
  //global variables
 var ViewModelsService = /** @class */ (function () {
@@ -4490,7 +4501,7 @@ var Gradient = /** @class */ (function () {
         var colorList = [];
         var self = this;
         this.colors.forEach(function (gColor) {
-            var hexstring = (tinycolor(gColor.color).toHexString());
+            var hexstring = (tinycolor2__WEBPACK_IMPORTED_MODULE_3__(gColor.color).toHexString());
             colorList.push(hexstring);
         });
         var rep = {
@@ -4508,7 +4519,7 @@ var Gradient = /** @class */ (function () {
         var obj = JSON.parse(rep);
         var isColorStringArray = function (check) {
             for (var i = 0; i < check.length; i++) {
-                if (typeof (check[i]) !== "string" || !tinycolor(check[i]).isValid()) {
+                if (typeof (check[i]) !== "string" || !tinycolor2__WEBPACK_IMPORTED_MODULE_3__(check[i]).isValid()) {
                     console.error("TypeError:", check[i], "(", typeof (check[i]), ")", "is not a color-string");
                     return false;
                 }
@@ -4539,7 +4550,7 @@ var Gradient = /** @class */ (function () {
         this.presets[preset].forEach(function (gcolor) {
             colorarray.push(gcolor.color);
         });
-        return tinygradient(colorarray).css('linear', 'to right');
+        return tinygradient__WEBPACK_IMPORTED_MODULE_2__(colorarray).css('linear', 'to right');
     };
     /**
      * set this gradient to use the preset
@@ -4561,7 +4572,7 @@ var Gradient = /** @class */ (function () {
             // if (format == "name" && colorobj.color in self.labelToColor)
             colorarray.push(colorobj.color);
         });
-        this.gradient = tinygradient(colorarray);
+        this.gradient = tinygradient__WEBPACK_IMPORTED_MODULE_2__(colorarray);
         this.gradientRGB = this.gradient.rgb(100);
     };
     /**
@@ -4665,7 +4676,7 @@ var ViewModel = /** @class */ (function () {
         // console.log("INITIALIZING VIEW MODEL FOR DOMAIN: " + this.domain);
         this.filters = new Filter(this.domain);
         this.name = name;
-        this.version = _globals__WEBPACK_IMPORTED_MODULE_2__["layer_version"];
+        this.version = _globals__WEBPACK_IMPORTED_MODULE_4__["layer_version"];
         this.uid = uid;
     }
     ViewModel.prototype.changeTechniqueIDSelectionLock = function () {
@@ -4987,9 +4998,9 @@ var ViewModel = /** @class */ (function () {
         var obj = (typeof (rep) == "string") ? JSON.parse(rep) : rep;
         this.name = obj.name;
         this.domain = obj.domain;
-        if (obj.version !== _globals__WEBPACK_IMPORTED_MODULE_2__["layer_version"]) {
+        if (obj.version !== _globals__WEBPACK_IMPORTED_MODULE_4__["layer_version"]) {
             alert("WARNING: Uploaded layer version (" + String(obj.version) + ") does not match Navigator's layer version ("
-                + String(_globals__WEBPACK_IMPORTED_MODULE_2__["layer_version"]) + "). The layer configuration may not be fully restored.");
+                + String(_globals__WEBPACK_IMPORTED_MODULE_4__["layer_version"]) + "). The layer configuration may not be fully restored.");
         }
         if ("description" in obj) {
             if (typeof (obj.description) === "string")
@@ -5043,7 +5054,7 @@ var ViewModel = /** @class */ (function () {
                     console.error("TypeError: legendItem label field is not a string");
                     continue;
                 }
-                if (typeof (obj.legendItems[i].color) === "string" && tinycolor(obj.legendItems[i].color).isValid()) {
+                if (typeof (obj.legendItems[i].color) === "string" && tinycolor2__WEBPACK_IMPORTED_MODULE_3__(obj.legendItems[i].color).isValid()) {
                     legendItem.color = obj.legendItems[i].color;
                 }
                 else {
@@ -5060,7 +5071,7 @@ var ViewModel = /** @class */ (function () {
                 console.error("TypeError: showTacticRowBackground field is not a boolean");
         }
         if ("tacticRowBackground" in obj) {
-            if (typeof (obj.tacticRowBackground) === "string" && tinycolor(obj.tacticRowBackground).isValid())
+            if (typeof (obj.tacticRowBackground) === "string" && tinycolor2__WEBPACK_IMPORTED_MODULE_3__(obj.tacticRowBackground).isValid())
                 this.tacticRowBackground = obj.tacticRowBackground;
             else
                 console.error("TypeError: tacticRowBackground field is not a color-string:", obj.tacticRowBackground, "(", typeof (obj.tacticRowBackground), ")");
@@ -5269,7 +5280,7 @@ var TechniqueVM = /** @class */ (function () {
                 console.error("TypeError: technique comment field is not a number:", obj.comment, "(", typeof (obj.comment), ")");
         }
         if ("color" in obj && obj.color !== "") {
-            if (typeof (obj.color) === "string" && tinycolor(obj.color).isValid())
+            if (typeof (obj.color) === "string" && tinycolor2__WEBPACK_IMPORTED_MODULE_3__(obj.color).isValid())
                 this.color = obj.color;
             else
                 console.error("TypeError: technique color field is not a color-string:", obj.color, "(", typeof (obj.color), ")");
