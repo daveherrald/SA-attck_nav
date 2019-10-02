@@ -1,4 +1,5 @@
 <nav search_view="search">
+  <view name="overview" />
   <view name="attack" default="true" />	
   <view name="simulation_runner" />
   <view name="search" />

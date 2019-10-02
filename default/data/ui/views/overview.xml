@@ -1,0 +1,13 @@
+<form>
+  <label>ATT&amp;CK Sim</label>
+  <description>This app is designed to provide a fully functional import of the MITRE ATT&amp;CK Navigator directly into Splunk. This app and its associated project provide a way to execute Atomic Red Team on workstations using Phantom as the automation harness.</description>
+
+    <row>
+         <panel>
+             <html>
+                 <style>.btn-primary { margin: 5px 10px 5px 0; }</style>
+                 <a href="attack" class="btn btn-primary">ATT&amp;CK Nav</a>
+             </html>
+         </panel>
+    </row>
+
