@@ -180,9 +180,13 @@
     <panel depends="detectionSearch">
       <title>Detection Search Panel</title>
       <input type="radio" token="search_hit" searchWhenChanged="true">
-        <label>Detection Search Fired?</label>
-        <choice value="1">Activity Detected</choice>
-        <choice value="0">Activity Not Detected</choice>
+          <label>Detection Search Fired?</label>
+            <choice value="-1">Needs Data </choice>
+            <choice value="0">Have Data; Not Detected</choice>
+            <choice value="1">Detection for single sub-technique</choice>
+            <choice value="2">Detection for multiple sub-techniques</choice>
+            <choice value="3">Active Correlation rule(s) in place</choice>
+            <choice value="4">Highest confidence</choice>
       </input>
       <html>
         <p>
