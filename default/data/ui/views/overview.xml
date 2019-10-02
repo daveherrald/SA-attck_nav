@@ -1,13 +1,42 @@
 <form>
-  <label>ATT&amp;CK Sim</label>
-  <description>This app is designed to provide a fully functional import of the MITRE ATT&amp;CK Navigator directly into Splunk. This app and its associated project provide a way to execute Atomic Red Team on workstations using Phantom as the automation harness.</description>
-
-    <row>
-         <panel>
-             <html>
-                 <style>.btn-primary { margin: 5px 10px 5px 0; }</style>
-                 <a href="attack" class="btn btn-primary">ATT&amp;CK Nav</a>
-             </html>
-         </panel>
-    </row>
+  <label>Overview</label>
+  <description>This app is designed to provide a fully functional import of the MITRE ATT&amp;CK Navigator directly into Splunk. This app and its associated project provide a way to execute Atomic Red Team on workstations using Phantom as the automation harness.  Upon loading the nav the first time, you will get an error if you do not "Reset" the master layer using the radio selector and submit button below.</description>
+  <row>
+    <panel>
+        <html>
+            <description>Once you've reset the master layer (if necessary), this button will take you back to the ATT&amp;CK Navigator.</description>
+        <style>.btn-primary { margin: 5px 10px 5px 0; }</style>
+        <a href="attack" class="btn btn-primary">ATT&amp;CK Nav</a>
+      </html>
+    </panel>
+</row>
+<row>
+    <panel>
+        <html>
+            <p>Additional help can be found at this github site: </p>
+            <a href="https://github.com/timfrazier1/AdversarySimulation">AdvSim Project Home</a>
+        </html>
+    </panel>
+</row>
+  <fieldset submitButton="true" autoRun="false">
+    <input type="radio" token="reset" searchWhenChanged="false">
+      <label>Reset Master Layer</label>
+      <choice value="1">Reset</choice>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search id="reset_master_layer">
+          <query>| makeresults 1 | genatklayer reset=$reset$</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+      </table>
+    </panel>
+  </row>
 </form>
