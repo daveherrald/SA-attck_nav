@@ -81,7 +81,7 @@ class genatklayerCommand(StreamingCommand):
         **Description:** The name of the field in your search results that has the att&ck technique id''',
         require=False, validate=None)
 
-    name = Option(
+    layername = Option(
         doc='''
         **Syntax:** **name=***<layer name>*
         **Description:** What name you want to give the layer in KVStore''',
@@ -128,11 +128,13 @@ class genatklayerCommand(StreamingCommand):
 
     def getMasterLayer(self, uri):
         r, c = splunk.rest.simpleRequest(uri, sessionKey=self.metadata.searchinfo.session_key, rawResult=True)
+        # case where master layer is found via its _key value in kvstore
         if r.status == 200:
             return json.loads(c)
+        # case where our master layer wasnt yet loaded into KVStore
         if r.status == 404:
             r, c = splunk.rest.simpleRequest(COLLECTION_URI, jsonargs=json.dumps(layer_master), sessionKey=self.metadata.searchinfo.session_key, rawResult=True) 
-            return {"error":"ayer file not loaded in KVStore, it has now been loaded on your behalf"}
+            return {"error":"Layer file not loaded in KVStore, it has now been loaded on your behalf"}
         else:
             return {"error":json.loads(c)}
 
@@ -145,6 +147,24 @@ class genatklayerCommand(StreamingCommand):
         else:
             return json.loads(c)
 
+    def saveCustomLayer(self, layer_data):
+        CUSTOM_LAYER_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers/{}?output_mode=json".format(appname,self.layername)
+        # test to see if the custom layer already exists
+        r, c = splunk.rest.simpleRequest(CUSTOM_LAYER_URI, sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
+        # yes, layer does exist
+        if r.status == 200:
+            # lets overwrite it
+            r, c = splunk.rest.simpleRequest(CUSTOM_LAYER_URI, jsonargs=json.dumps(layer_data), sessionKey=self.metadata.searchinfo.session_key, rawResult=True) 
+            return {"error":"Layer file not loaded in KVStore, it has now been loaded on your behalf"}
+
+        # no, layer does not exist, lets creat it and save it, note we need to drop down to the collection URI to POST our args
+        if r.status == 404:
+            r, c = splunk.rest.simpleRequest(COLLECTION_URI, jsonargs=json.dumps(layer_data), sessionKey=self.metadata.searchinfo.session_key, rawResult=True) 
+            return {"error":"Layer file not loaded in KVStore, it has now been loaded on your behalf"}
+
+        #some other generic error
+        else:
+            return {"error":json.loads(c)}
 
 
     def stream(self, records):
@@ -218,12 +238,21 @@ class genatklayerCommand(StreamingCommand):
                                 tech['color'] = BLUE_4
             else:
                 record['_raw'] = "Error no field with that name exists {}".format(self.atkfield)
+                raise Exception("Error no field with that name exists {}".format(self.atkfield))
             yield record
-        # post updated layer if all was successful
-        r, c = splunk.rest.simpleRequest(MASTER_URI, jsonargs=json.dumps(master_layer), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
-        if r.status == 200:
-            self.logger.debug('updated master layer successfully: {}'.format(json.loads(c)))
-        else:
-            self.logger.debug('error updating master layer successfully: {}'.format(json.loads(c)))
+        # if the user passes a name arg then create the new kvstore entry for that new layer
+        # will want to update this code in the future to handle error cases better, and user feedback
+
+        if self.layername is not None:
+            master_layer['_key'] = self.layername
+            status = self.saveCustomLayer(master_layer)
+            self.logger.debug('custom layer file requested: {}'.format(status))
+        # post updated master layer if all was successful & we didn't get a name argument
+        else:    
+            r, c = splunk.rest.simpleRequest(MASTER_URI, jsonargs=json.dumps(master_layer), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
+            if r.status == 200:
+                self.logger.debug('updated master layer successfully: {}'.format(json.loads(c)))
+            else:
+                self.logger.debug('error updating master layer successfully: {}'.format(json.loads(c)))
 
 dispatch(genatklayerCommand, sys.argv, sys.stdin, sys.stdout, __name__)

@@ -1,5 +1,5 @@
 <%!
-app_name = cherrypy.request.path_info.split('/')[3]
+from splunk.appserver.mrsparkle.lib import util
 
 %>\
 <!doctype html>
@@ -12,6 +12,7 @@ app_name = cherrypy.request.path_info.split('/')[3]
         Attack Navigator
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="${util.getFaviconURL()}" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 
@@ -24,11 +25,7 @@ app_name = cherrypy.request.path_info.split('/')[3]
         __splunkd_partials__ = ${json_decode(splunkd)};
     </script>
 
-    <%
-    page_path = "/static/app/" + app_name + "/pages/" + page + ".js"
-    %>
-
-    <script src="${make_url(page_path)}"></script>
+    <script src="${make_url('/static/app/SA-attck_nav/pages/%s.js' % page)}"></script>
 </body>
 
 </html>

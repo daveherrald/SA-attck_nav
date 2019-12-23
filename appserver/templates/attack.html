@@ -1,5 +1,5 @@
 <%!
-app_name = cherrypy.request.path_info.split('/')[3]
+from splunk.appserver.mrsparkle.lib import util
 
 %>\
 <!doctype html>
@@ -12,6 +12,7 @@ app_name = cherrypy.request.path_info.split('/')[3]
         ATT&CK BOARD
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="${util.getFaviconURL()}" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <base href="/static/app/SA-attck_nav/" /> 
     <style>
@@ -29,11 +30,8 @@ app_name = cherrypy.request.path_info.split('/')[3]
     <script>
         __splunkd_partials__ = ${json_decode(splunkd)};
     </script>
-    <%
-    page_path = "/static/app/" + app_name + "/pages/" + page + ".js"
-    %>
 
-    <script src="${make_url(page_path)}"></script>
+    <script src="${make_url('/static/app/SA-attck_nav/pages/%s.js' % page)}"></script>
     </div>
     <div>
 
