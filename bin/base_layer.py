@@ -23,7 +23,32 @@ layer_master = {
         "minValue": 0
     },
     "hideDisabled": False,
-    "legendItems": [],
+    "legendItems": [
+		{
+			"label": "Have Data; Not Detected",
+			"color": "#ffe766"
+		},
+		{
+			"label": "Needs Data",
+			"color": "#ff6666"
+		},
+		{
+			"label": "Detect single sub-technique",
+			"color": "#c6dbef"
+		},
+		{
+			"label": "Detect Multiple sub-techniques",
+			"color": "#9ecae1"
+		},
+		{
+			"label": "Correlation rule(s) in place",
+			"color": "#6baed6"
+		},
+		{
+			"label": "Highest confidence",
+			"color": "#3182bd"
+		}
+	],
     "metadata": [],
     "name": "master_layer",
     "selectTechniquesAcrossTactics": True,
