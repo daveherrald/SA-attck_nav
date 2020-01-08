@@ -132,7 +132,7 @@ class genatklayerCommand(StreamingCommand):
             return json.loads(c)
         if r.status == 404:
             r, c = splunk.rest.simpleRequest(COLLECTION_URI, jsonargs=json.dumps(layer_master), sessionKey=self.metadata.searchinfo.session_key, rawResult=True) 
-            return {"error":"ayer file not loaded in KVStore, it has now been loaded on your behalf"}
+            return {"error":"Layer file not loaded in KVStore, it has now been loaded on your behalf"}
         else:
             return {"error":json.loads(c)}
 

@@ -1,3 +1,6 @@
+This repository is part of a larger [Adversary Simulation project](https://github.com/timfrazier1/AdversarySimulation).  The main page includes some installation guidance and information about other components.  Please refer there for more information. 
+
+
 This Splunk App is intended to implement the [ATT&CK navigator](https://github.com/mitre/attack-navigator) inside of Splunkweb as an "app".
 It also includes a REST handler to read and update the "Custom Context Menu Options"
 
