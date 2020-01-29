@@ -8,10 +8,12 @@
     <input type="text" token="test_id">
       <label>Technique ID</label>
     </input>
-    <input type="text" token="playbook_name">
+    <input type="dropdown" token="playbook_name">
       <label>Playbook Name</label>
       <default>Modular Simulation</default>
       <initialValue>Modular Simulation</initialValue>
+      <choice value="Modular Simulation">Modular Simulation</choice>
+      <choice value="Invoke Simulation">Invoke Simulation</choice>
     </input>
     <input type="dropdown" token="ph_srv">
       <label>Phantom Server</label>
