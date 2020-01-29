@@ -167,7 +167,7 @@
 | addinfo
 | sort _time
 | stats earliest(_time) as group_earliest latest(_time) as group_latest
-| eval group_earliest = (group_earliest - 100) | eval group_latest = (group_latest + 5)</query>
+| eval group_earliest = (group_earliest - 10) | eval group_latest = (group_latest + 5)</query>
           <earliest>$earliest$</earliest>
           <latest>$latest$</latest>
         </search>
