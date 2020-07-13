@@ -1,7 +1,9 @@
-layer_master = {
-    "_key": "master_layer",
+layer_default = {
+    "_key": "default_layer",
     "_user": "nobody",
-    "description": "",
+    "name": "Default Layer",
+    "version": "3.0",
+    "description": "ART Techniques enabled",
     "domain": "mitre-enterprise",
     "filters": {
         "platforms": [
@@ -22,7 +24,8 @@ layer_master = {
         "maxValue": 100,
         "minValue": 0
     },
-    "hideDisabled": False,
+    "hideDisabled": "false",
+    "sorting": 3,
     "legendItems": [
 		{
 			"label": "Have Data; Not Detected",
@@ -49,2212 +52,1718 @@ layer_master = {
 			"color": "#3182bd"
 		}
 	],
-    "metadata": [],
-    "name": "master_layer",
-    "selectTechniquesAcrossTactics": True,
-    "showTacticRowBackground": False,
-    "sorting": 0,
-    "tacticRowBackground": "#dddddd",
     "techniques": [
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1156"
+            "techniqueID": "T1546.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1134"
+            "techniqueID": "T1003.008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1134"
+            "techniqueID": "T1548",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1015"
+            "techniqueID": "T1134",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1015"
+            "techniqueID": "T1546.008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1087"
+            "techniqueID": "T1531",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1098"
+            "techniqueID": "T1087",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1098"
+            "techniqueID": "T1098",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1182"
+            "techniqueID": "T1098.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1182"
+            "techniqueID": "T1137.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1103"
+            "techniqueID": "T1098.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1103"
+            "techniqueID": "T1546.009",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1155"
+            "techniqueID": "T1546.010",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1155"
+            "techniqueID": "T1059.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1017"
+            "techniqueID": "T1550.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1138"
+            "techniqueID": "T1499.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1138"
+            "techniqueID": "T1071",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1010"
+            "techniqueID": "T1546.011",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1123"
+            "techniqueID": "T1010",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1131"
+            "techniqueID": "T1499.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1119"
+            "techniqueID": "T1560",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1020"
+            "techniqueID": "T1560.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1197"
+            "techniqueID": "T1560.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1197"
+            "techniqueID": "T1560.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1139"
+            "techniqueID": "T1573.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1009"
+            "techniqueID": "T1055.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1067"
+            "techniqueID": "T1053.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1217"
+            "techniqueID": "T1053.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1176"
+            "techniqueID": "T1123",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1110"
+            "techniqueID": "T1547.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1088"
+            "techniqueID": "T1119",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1088"
+            "techniqueID": "T1020",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1191"
+            "techniqueID": "T1197",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1191"
+            "techniqueID": "T1552.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1042"
+            "techniqueID": "T1102.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1146"
+            "techniqueID": "T1027.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1115"
+            "techniqueID": "T1547",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1116"
+            "techniqueID": "T1037",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1059"
+            "techniqueID": "T1542.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1043"
+            "techniqueID": "T1217",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1092"
+            "techniqueID": "T1176",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1500"
+            "techniqueID": "T1110",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1223"
+            "techniqueID": "T1548.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1223"
+            "techniqueID": "T1218.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1109"
+            "techniqueID": "T1574.012",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1109"
+            "techniqueID": "T1003.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1122"
+            "techniqueID": "T1546.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1122"
+            "techniqueID": "T1070.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1090"
+            "techniqueID": "T1070.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1196"
+            "techniqueID": "T1070.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1196"
+            "techniqueID": "T1115",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1136"
+            "techniqueID": "T1136.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1003"
+            "techniqueID": "T1087.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1081"
+            "techniqueID": "T1078.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1214"
+            "techniqueID": "T1069.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1094"
+            "techniqueID": "T1552.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1024"
+            "techniqueID": "T1538",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1207"
+            "techniqueID": "T1526",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1038"
+            "techniqueID": "T1553.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1038"
+            "techniqueID": "T1059",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1038"
+            "techniqueID": "T1092",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1073"
+            "techniqueID": "T1027.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1002"
+            "techniqueID": "T1218.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1485"
+            "techniqueID": "T1542.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1132"
+            "techniqueID": "T1559.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1022"
+            "techniqueID": "T1546.015",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1486"
+            "techniqueID": "T1554",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1001"
+            "techniqueID": "T1195.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1074"
+            "techniqueID": "T1195.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1030"
+            "techniqueID": "T1195.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1213"
+            "techniqueID": "T1213.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1005"
+            "techniqueID": "T1218.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1039"
+            "techniqueID": "T1136",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1025"
+            "techniqueID": "T1578.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1491"
+            "techniqueID": "T1134.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1140"
+            "techniqueID": "T1578.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1089"
+            "techniqueID": "T1543",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1488"
+            "techniqueID": "T1056.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1487"
+            "techniqueID": "T1110.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1175"
+            "techniqueID": "T1552.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1172"
+            "techniqueID": "T1555",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1483"
+            "techniqueID": "T1555.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1482"
+            "techniqueID": "T1552.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1189"
+            "techniqueID": "T1053.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1157"
+            "techniqueID": "T1003.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1157"
+            "techniqueID": "T1574.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1173"
+            "techniqueID": "T1574.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1114"
+            "techniqueID": "T1071.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1499"
+            "techniqueID": "T1568.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1480"
+            "techniqueID": "T1485",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1106"
+            "techniqueID": "T1132",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1129"
+            "techniqueID": "T1486",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1048"
+            "techniqueID": "T1565",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1041"
+            "techniqueID": "T1001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1011"
+            "techniqueID": "T1074",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1052"
+            "techniqueID": "T1030",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1190"
+            "techniqueID": "T1530",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1203"
+            "techniqueID": "T1213",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1212"
+            "techniqueID": "T1005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1211"
+            "techniqueID": "T1039",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1068"
+            "techniqueID": "T1025",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1210"
+            "techniqueID": "T1102.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1133"
+            "techniqueID": "T1491",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1133"
+            "techniqueID": "T1078.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1181"
+            "techniqueID": "T1578.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1181"
+            "techniqueID": "T1140",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1008"
+            "techniqueID": "T1498.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1107"
+            "techniqueID": "T1006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1222"
+            "techniqueID": "T1562.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1006"
+            "techniqueID": "T1562.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1044"
+            "techniqueID": "T1562.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1044"
+            "techniqueID": "T1562.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1083"
+            "techniqueID": "T1561.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1495"
+            "techniqueID": "T1561.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1187"
+            "techniqueID": "T1561",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1144"
+            "techniqueID": "T1021.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1061"
+            "techniqueID": "T1136.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1484"
+            "techniqueID": "T1087.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1148"
+            "techniqueID": "T1078.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1200"
+            "techniqueID": "T1556.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1158"
+            "techniqueID": "T1090.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1158"
+            "techniqueID": "T1568.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1147"
+            "techniqueID": "T1069.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1143"
+            "techniqueID": "T1482",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1179"
+            "techniqueID": "T1189",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1179"
+            "techniqueID": "T1574.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1179"
+            "techniqueID": "T1559.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1062"
+            "techniqueID": "T1568",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1183"
+            "techniqueID": "T1055.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1183"
+            "techniqueID": "T1548.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1183"
+            "techniqueID": "T1087.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1054"
+            "techniqueID": "T1114",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1066"
+            "techniqueID": "T1114.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1070"
+            "techniqueID": "T1546.014",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1202"
+            "techniqueID": "T1573",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1490"
+            "techniqueID": "T1499",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1056"
+            "techniqueID": "T1480.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1056"
+            "techniqueID": "T1546",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1141"
+            "techniqueID": "T1098.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1130"
+            "techniqueID": "T1574.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1118"
+            "techniqueID": "T1480",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1118"
+            "techniqueID": "T1048",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1208"
+            "techniqueID": "T1048.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1215"
+            "techniqueID": "T1011.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1142"
+            "techniqueID": "T1041",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1161"
+            "techniqueID": "T1011",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1149"
+            "techniqueID": "T1052",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1171"
+            "techniqueID": "T1048.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1177"
+            "techniqueID": "T1048.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1177"
+            "techniqueID": "T1567",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1159"
+            "techniqueID": "T1052.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1160"
+            "techniqueID": "T1567.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1160"
+            "techniqueID": "T1567.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1152"
+            "techniqueID": "T1190",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1152"
+            "techniqueID": "T1203",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1152"
+            "techniqueID": "T1212",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1168"
+            "techniqueID": "T1211",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1168"
+            "techniqueID": "T1068",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1162"
+            "techniqueID": "T1210",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1037"
+            "techniqueID": "T1491.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1037"
+            "techniqueID": "T1090.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1185"
+            "techniqueID": "T1133",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1036"
+            "techniqueID": "T1055.011",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1031"
+            "techniqueID": "T1008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1112"
+            "techniqueID": "T1568.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1170"
+            "techniqueID": "T1070.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1170"
+            "techniqueID": "T1071.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1104"
+            "techniqueID": "T1083",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1188"
+            "techniqueID": "T1222",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1026"
+            "techniqueID": "T1495",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1079"
+            "techniqueID": "T1187",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1096"
+            "techniqueID": "T1056.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1128"
+            "techniqueID": "T1553.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1498"
+            "techniqueID": "T1558.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1046"
+            "techniqueID": "T1484",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1126"
+            "techniqueID": "T1552.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1135"
+            "techniqueID": "T1562.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1040"
+            "techniqueID": "T1200",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1040"
+            "techniqueID": "T1564.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1050"
+            "techniqueID": "T1564.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1050"
+            "techniqueID": "T1564.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1027"
+            "techniqueID": "T1564.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1137"
+            "techniqueID": "T1564",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1075"
+            "techniqueID": "T1574",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1097"
+            "techniqueID": "T1546.012",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1174"
+            "techniqueID": "T1562",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1201"
+            "techniqueID": "T1525",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1034"
+            "techniqueID": "T1562.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1034"
+            "techniqueID": "T1027.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1120"
+            "techniqueID": "T1070",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1069"
+            "techniqueID": "T1202",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1150"
+            "techniqueID": "T1105",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1150"
+            "techniqueID": "T1490",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1150"
+            "techniqueID": "T1056",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1205"
+            "techniqueID": "T1553.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1205"
+            "techniqueID": "T1218.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1205"
+            "techniqueID": "T1559",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1013"
+            "techniqueID": "T1491.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1013"
+            "techniqueID": "T1090.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1086"
+            "techniqueID": "T1534",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1145"
+            "techniqueID": "T1036.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1057"
+            "techniqueID": "T1059.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1186"
+            "techniqueID": "T1001.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1093"
+            "techniqueID": "T1558.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1055"
+            "techniqueID": "T1547.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1055"
+            "techniqueID": "T1555.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1012"
+            "techniqueID": "T1056.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1163"
+            "techniqueID": "T1546.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1164"
+            "techniqueID": "T1574.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1108"
+            "techniqueID": "T1557.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1108"
+            "techniqueID": "T1003.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1060"
+            "techniqueID": "T1547.008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1121"
+            "techniqueID": "T1003.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1121"
+            "techniqueID": "T1570",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1117"
+            "techniqueID": "T1543.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1117"
+            "techniqueID": "T1543.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1219"
+            "techniqueID": "T1569.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1076"
+            "techniqueID": "T1053.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1105"
+            "techniqueID": "T1222.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1105"
+            "techniqueID": "T1136.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1021"
+            "techniqueID": "T1087.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1018"
+            "techniqueID": "T1078.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1091"
+            "techniqueID": "T1074.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1091"
+            "techniqueID": "T1114.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1496"
+            "techniqueID": "T1069.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1014"
+            "techniqueID": "T1037.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1085"
+            "techniqueID": "T1037.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1085"
+            "techniqueID": "T1127.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1494"
+            "techniqueID": "T1071.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1178"
+            "techniqueID": "T1134.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1198"
+            "techniqueID": "T1204.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1198"
+            "techniqueID": "T1204.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1184"
+            "techniqueID": "T1185",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1053"
+            "techniqueID": "T1557",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1053"
+            "techniqueID": "T1036.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1053"
+            "techniqueID": "T1036",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "exfiltration",
-            "techniqueID": "T1029"
+            "techniqueID": "T1036.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1113"
+            "techniqueID": "T1556",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1180"
+            "techniqueID": "T1578",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1064"
+            "techniqueID": "T1112",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1064"
+            "techniqueID": "T1218.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1063"
+            "techniqueID": "T1218.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1101"
+            "techniqueID": "T1104",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1167"
+            "techniqueID": "T1090.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1035"
+            "techniqueID": "T1003.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1058"
+            "techniqueID": "T1564.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1058"
+            "techniqueID": "T1106",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1489"
+            "techniqueID": "T1546.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1166"
+            "techniqueID": "T1498",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1166"
+            "techniqueID": "T1037.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1051"
+            "techniqueID": "T1046",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1023"
+            "techniqueID": "T1070.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1218"
+            "techniqueID": "T1135",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1218"
+            "techniqueID": "T1040",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1216"
+            "techniqueID": "T1095",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1216"
+            "techniqueID": "T1132.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1045"
+            "techniqueID": "T1571",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1153"
+            "techniqueID": "T1003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1151"
+            "techniqueID": "T1499.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1151"
+            "techniqueID": "T1027",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1193"
+            "techniqueID": "T1218.008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1192"
+            "techniqueID": "T1137",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1194"
+            "techniqueID": "T1137.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1071"
+            "techniqueID": "T1137.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1032"
+            "techniqueID": "T1102.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1095"
+            "techniqueID": "T1137.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1165"
+            "techniqueID": "T1137.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1165"
+            "techniqueID": "T1137.005",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1492"
+            "techniqueID": "T1134.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1169"
+            "techniqueID": "T1550.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1206"
+            "techniqueID": "T1550.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1195"
+            "techniqueID": "T1110.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1019"
+            "techniqueID": "T1556.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1082"
+            "techniqueID": "T1110.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1016"
+            "techniqueID": "T1201",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1049"
+            "techniqueID": "T1110.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1033"
+            "techniqueID": "T1574.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1007"
+            "techniqueID": "T1574.008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1124"
+            "techniqueID": "T1574.009",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1501"
+            "techniqueID": "T1120",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1080"
+            "techniqueID": "T1069",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1221"
+            "techniqueID": "T1566",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1072"
+            "techniqueID": "T1547.011",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1072"
+            "techniqueID": "T1556.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1209"
+            "techniqueID": "T1205.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1099"
+            "techniqueID": "T1547.010",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "impact",
-            "techniqueID": "T1493"
+            "techniqueID": "T1055.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1154"
+            "techniqueID": "T1059.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1154"
+            "techniqueID": "T1546.013",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1127"
+            "techniqueID": "T1542",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1127"
+            "techniqueID": "T1552.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1199"
+            "techniqueID": "T1003.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "credential-access",
-            "techniqueID": "T1111"
+            "techniqueID": "T1055.009",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1065"
+            "techniqueID": "T1057",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1204"
+            "techniqueID": "T1055.013",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1078"
+            "techniqueID": "T1055.012",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1078"
+            "techniqueID": "T1055",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1078"
+            "techniqueID": "T1001.003",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "initial-access",
-            "techniqueID": "T1078"
+            "techniqueID": "T1572",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "collection",
-            "techniqueID": "T1125"
+            "techniqueID": "T1090",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1497"
+            "techniqueID": "T1055.008",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "discovery",
-            "techniqueID": "T1497"
+            "techniqueID": "T1216.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "command-and-control",
-            "techniqueID": "T1102"
+            "techniqueID": "T1059.006",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": False,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1102"
+            "techniqueID": "T1012",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1100"
+            "techniqueID": "T1563.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "privilege-escalation",
-            "techniqueID": "T1100"
+            "techniqueID": "T1037.004",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1077"
+            "techniqueID": "T1547.007",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1047"
+            "techniqueID": "T1498.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1084"
+            "techniqueID": "T1547.001",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1028"
+            "techniqueID": "T1218.009",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "lateral-movement",
-            "techniqueID": "T1028"
+            "techniqueID": "T1218.010",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "persistence",
-            "techniqueID": "T1004"
+            "techniqueID": "T1219",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "defense-evasion",
-            "techniqueID": "T1220"
+            "techniqueID": "T1074.002",
+            "enabled": "true"
         },
         {
-            "comment": "",
-            "enabled": True,
-            "metadata": [],
-            "tactic": "execution",
-            "techniqueID": "T1220"
+            "techniqueID": "T1021.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1114.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1563",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1021",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1018",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1036.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1091",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1496",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1578.004",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1036.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1207",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1014",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1564.006",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1218.011",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1565.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1134.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1553.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1021.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1505.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1021.004",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1098.004",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1563.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1053.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1053",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1029",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1113",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1546.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1003.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1518.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1547.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1555.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1505",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1569.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1499.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1489",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1574.010",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1574.011",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1548.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1129",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1213.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1547.009",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1218",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1216",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1558.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1072",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1518",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1027.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1036.006",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1566.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1566.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1566.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1132.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1037.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1528",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1539",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1558",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1027.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1001.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1565.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1553",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1548.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1195",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1573.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1497.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1542.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1082",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1016",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1049",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1033",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1007",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1569",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1529",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1124",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1543.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1080",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1221",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1055.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1055.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1497.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1547.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1070.006",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1134.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1205",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1537",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1565.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1505.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1546.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1127",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1199",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1111",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1059.004",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1552",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1535",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1550",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1497.002",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1204",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1055.014",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1021.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1078",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1125",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1497",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1059.005",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1056.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1071.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1102",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1550.004",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1505.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1059.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1222.001",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1047",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1546.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1021.006",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1543.003",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1547.004",
+            "enabled": "true"
+        },
+        {
+            "techniqueID": "T1220",
+            "enabled": "true"
         }
-    ],
-    "version": "2.1",
-    "viewMode": 0
+    ]
 }

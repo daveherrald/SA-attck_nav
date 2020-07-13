@@ -27,7 +27,7 @@
   <row>
     <panel>
       <table>
-        <search id="reset_master_layer">
+        <search id="reset_default_layer">
           <query>| makeresults 1 | genatklayer reset=$reset$</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>

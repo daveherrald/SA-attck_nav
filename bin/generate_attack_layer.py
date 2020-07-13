@@ -34,7 +34,7 @@ import sys
 import splunk.rest
 
 # import our base layer
-from base_layer import  layer_master
+from base_layer import  layer_default
 
 
 # py3 stuff
@@ -49,7 +49,7 @@ DESCRIPTION = "Default Desription"
 DOMAIN = "mitre-enterprise"
 COLLECTION_NAME = "attack_layers"
 COLLECTION_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers?output_mode=json".format(appname)
-MASTER_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers/master_layer?output_mode=json".format(appname)
+DEFAULT_URI = "/servicesNS/Nobody/{}/storage/collections/data/attack_layers/default_layer?output_mode=json".format(appname)
 RED_LT = "#FCA1A2" # -1 not detected
 YELLOW_DK = "#E6D60B" # 0 tested but not found
 BLUE_1 = "#C6DBEF" # 1 detected technique but no rule and no sub technique
@@ -96,7 +96,7 @@ class genatklayerCommand(StreamingCommand):
     reset = Option(
         doc='''
         **Syntax:** **reset=***<bool>*
-        **Description:** Reset the master layer back to its original state''',
+        **Description:** Reset the default layer back to its original state''',
         require=False, validate=validators.Boolean())
 
 
@@ -126,22 +126,22 @@ class genatklayerCommand(StreamingCommand):
     }
     """
 
-    def getMasterLayer(self, uri):
+    def getDefaultLayer(self, uri):
         r, c = splunk.rest.simpleRequest(uri, sessionKey=self.metadata.searchinfo.session_key, rawResult=True)
-        # case where master layer is found via its _key value in kvstore
+        # case where default layer is found via its _key value in kvstore
         if r.status == 200:
             return json.loads(c)
-        # case where our master layer wasnt yet loaded into KVStore
+        # case where our default layer wasnt yet loaded into KVStore
         if r.status == 404:
-            r, c = splunk.rest.simpleRequest(COLLECTION_URI, jsonargs=json.dumps(layer_master), sessionKey=self.metadata.searchinfo.session_key, rawResult=True) 
+            r, c = splunk.rest.simpleRequest(COLLECTION_URI, jsonargs=json.dumps(layer_default), sessionKey=self.metadata.searchinfo.session_key, rawResult=True) 
             return {"error":"Layer file not loaded in KVStore, it has now been loaded on your behalf"}
         else:
             return {"error":json.loads(c)}
 
-    def resetMasterLayer(self,uri):
+    def resetDefaultLayer(self,uri):
         # if layer exists - error similar to the below will be thrown
         # {"messages":[{"type":"ERROR","text":"A document with the same key and user already exists."}]}
-        r, c = splunk.rest.simpleRequest(uri, jsonargs=json.dumps(layer_master), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
+        r, c = splunk.rest.simpleRequest(uri, jsonargs=json.dumps(layer_default), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
         if r.status == 200:
             return json.loads(c)
         else:
@@ -171,15 +171,15 @@ class genatklayerCommand(StreamingCommand):
 
         self.logger.debug('genatklayerCommand: %s', self)  # logs command line
         if self.reset:
-            resp = self.resetMasterLayer(MASTER_URI)
+            resp = self.resetDefaultLayer(DEFAULT_URI)
             for record in records:
                 record['_raw'] = json.dumps(resp)
                 yield record
         
-        # attempt to get the master layer
-        master_layer = self.getMasterLayer(MASTER_URI)
-        if "error" in master_layer:
-            raise Exception("Error retrieving layer. {}".format(str(master_layer['error'])))
+        # attempt to get the default layer
+        default_layer = self.getDefaultLayer(DEFAULT_URI)
+        if "error" in default_layer:
+            raise Exception("Error retrieving layer. {}".format(str(default_layer['error'])))
 
         # iterate through our search results
         for record in records:
@@ -189,7 +189,7 @@ class genatklayerCommand(StreamingCommand):
                 # iterate through the techniques array in our layer file
                 # we also will set our layers "scores" values per technique ID 
                 # to zero if we dont have a value yet, otherwise, proceed
-                for tech in master_layer['techniques']:
+                for tech in default_layer['techniques']:
                     # Scoring example - reserving for later
                     #if 'score' not in tech:
                     #    tech['score'] = 0
@@ -244,15 +244,15 @@ class genatklayerCommand(StreamingCommand):
         # will want to update this code in the future to handle error cases better, and user feedback
 
         if self.layername is not None:
-            master_layer['_key'] = self.layername
-            status = self.saveCustomLayer(master_layer)
+            default_layer['_key'] = self.layername
+            status = self.saveCustomLayer(default_layer)
             self.logger.debug('custom layer file requested: {}'.format(status))
-        # post updated master layer if all was successful & we didn't get a name argument
+        # post updated default layer if all was successful & we didn't get a name argument
         else:    
-            r, c = splunk.rest.simpleRequest(MASTER_URI, jsonargs=json.dumps(master_layer), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
+            r, c = splunk.rest.simpleRequest(DEFAULT_URI, jsonargs=json.dumps(default_layer), sessionKey=self.metadata.searchinfo.session_key, rawResult=True)    
             if r.status == 200:
-                self.logger.debug('updated master layer successfully: {}'.format(json.loads(c)))
+                self.logger.debug('updated default layer successfully: {}'.format(json.loads(c)))
             else:
-                self.logger.debug('error updating master layer successfully: {}'.format(json.loads(c)))
+                self.logger.debug('error updating default layer successfully: {}'.format(json.loads(c)))
 
 dispatch(genatklayerCommand, sys.argv, sys.stdin, sys.stdout, __name__)

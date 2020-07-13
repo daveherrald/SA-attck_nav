@@ -13155,22 +13155,25 @@ __webpack_require__.r(__webpack_exports__);
  * Need to import at least one locale-data with intl.
  */
 // import 'intl/locale-data/jsonp/en';
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
 
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!***************************************************************************************************************************!*\
   !*** multi ./src/polyfills.ts ./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js ***!
   \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kchamplin/programming/attack-navigator/attack-navigator/nav-app/src/polyfills.ts */"./src/polyfills.ts");
-module.exports = __webpack_require__(/*! /Users/kchamplin/programming/attack-navigator/attack-navigator/nav-app/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
+__webpack_require__(/*! /Users/kchamplin/programming/mitre_attack/attack-navigator/nav-app/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/kchamplin/programming/mitre_attack/attack-navigator/nav-app/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
 
 
 /***/ })
 
-},[[5,"runtime"]]]);
+},[[6,"runtime"]]]);
 //# sourceMappingURL=polyfills.js.map
