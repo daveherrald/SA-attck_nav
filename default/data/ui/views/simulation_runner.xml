@@ -189,13 +189,13 @@
     <panel depends="detectionSearch">
       <title>Detection Search Panel</title>
       <input type="radio" token="search_hit" searchWhenChanged="true">
-          <label>Detection Search Fired?</label>
-            <choice value="-1">Needs Data </choice>
-            <choice value="0">Have Data; Not Detected</choice>
-            <choice value="1">Detection for single sub-technique</choice>
-            <choice value="2">Detection for multiple sub-techniques</choice>
-            <choice value="3">Active Correlation rule(s) in place</choice>
-            <choice value="4">Highest confidence</choice>
+        <label>Detection Search Fired?</label>
+        <choice value="-1">Needs Data</choice>
+        <choice value="0">Have Data; Not Detected</choice>
+        <choice value="1">Detection for single sub-technique</choice>
+        <choice value="2">Detection for multiple sub-techniques</choice>
+        <choice value="3">Active Correlation rule(s) in place</choice>
+        <choice value="4">Highest confidence</choice>
       </input>
       <html>
         <p>
@@ -216,8 +216,8 @@
       <title>Olaf Rule Detect Events</title>
       <table>
         <search>
-          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ RuleName=*$test_id$*
-| sort _time | table _time, EventCode, EventType, EventDescription, RuleName,</query>
+          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ source="WinEventLog:Sysmon" RuleName=*$test_id$*
+| sort _time | table _time, EventCode, EventType, EventDescription, RuleName</query>
           <earliest>-1d@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -238,9 +238,9 @@
       <title>Sysmon Registry Events</title>
       <table>
         <search>
-          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" (EventCode=12 OR EventCode=13)
+          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ source="WinEventLog:Sysmon" (EventCode=12 OR EventCode=13)
 | sort _time
-| table _time, EventCode, EventDescription, Details, object_path,</query>
+| table _time, EventCode, EventType, Image, TargetObject,</query>
           <earliest>-1d@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -280,9 +280,9 @@
       <title>Cmd.exe commands from events during test time</title>
       <table>
         <search>
-          <query>| search index=* host=$asset$ earliest=$group_earliest$ latest=$group_latest$ parent_process=*cmd.exe* CommandLine!=*-encoded*
+          <query>| search index=* host=$asset$ earliest=$group_earliest$ latest=$group_latest$ process_parent_name=*cmd.exe* Process_Command_Line!=*-encoded*
 | sort _time
-| table _time, parent_process, CommandLine</query>
+| table _time, process_parent_name, Process_Command_Line</query>
           <earliest>$earliest$</earliest>
           <latest>$latest$</latest>
         </search>
@@ -296,9 +296,9 @@
       <title>Sysmon File Create Events</title>
       <table>
         <search>
-          <query>index=* sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" host=$asset$ EventCode=11
+          <query>index=* source="WinEventLog:Sysmon" host=$asset$ EventCode=11
 | sort _time
-| table _time, EventCode, EventDescription, TargetFilename, process_path,</query>
+| table _time, EventCode, RuleName, Image, TargetFilename, ProcessId</query>
           <earliest>$group_earliest$</earliest>
           <latest>$group_latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -319,7 +319,7 @@
       <title>All Sysmon Events</title>
       <event>
         <search>
-          <query>index=* sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" host=$asset$ | fields + *</query>
+          <query>index=* source="WinEventLog:Sysmon" host=$asset$ | fields + *</query>
           <earliest>$group_earliest$</earliest>
           <latest>$group_latest$</latest>
         </search>
