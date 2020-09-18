@@ -15,7 +15,8 @@
     "domain": "mitre-enterprise",
 
     "custom_context_menu_items": [
-
+        {"label": "run test", "url": "/app/SA-attck_nav/simulation_runner?form.tech_name={{technique_name}}&form.test_id={{technique_attackID}}"}, 
+        {"label": "view executor", "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/{{technique_attackID}}"}
     ],
 
     "default_layers": {
