@@ -8,25 +8,25 @@
     <input type="text" token="test_id">
       <label>Technique ID</label>
     </input>
+    <input type="text" token="tech_test_nums">
+      <label>Technique Test Numbers</label>
+      <default>0</default>
+      <initialValue>0</initialValue>
+    </input>
     <input type="dropdown" token="playbook_name">
       <label>Playbook Name</label>
-      <default>Modular Simulation</default>
-      <initialValue>Modular Simulation</initialValue>
-      <choice value="Modular Simulation">Modular Simulation</choice>
+      <default>Invoke Simulation</default>
       <choice value="Invoke Simulation">Invoke Simulation</choice>
+      <initialValue>Invoke Simulation</initialValue>
     </input>
-    <input type="dropdown" token="ph_srv">
-      <label>Phantom Server</label>
-      <fieldForLabel>custom_name</fieldForLabel>
-      <fieldForValue>phantom_server</fieldForValue>
+    <input type="dropdown" token="an_srv">
+      <label>Ansible Server</label>
       <search>
-        <query>| rest /servicesNS/-/phantom/configs/conf-phantom/phantom | rex field=value "^\{\"(?&lt;phantom_server&gt;.*)\"\:\s{" | rex field=value "\"custom_name\": \"(?&lt;custom_name&gt;[^\"]*)\"" | table phantom_server, custom_name</query>
+        <query/>
         <earliest>-15m</earliest>
         <latest>now</latest>
       </search>
-      <choice value="NULL">NULL</choice>
-      <default>jxndnzdr</default>
-      <initialValue>jxndnzdr</initialValue>
+      <choice value="ansible-srv1.lab.lan">ansible-srv1.lab.lan</choice>
     </input>
     <input type="dropdown" token="asset" searchWhenChanged="false">
       <label>Asset</label>
@@ -38,34 +38,7 @@
       <fieldForLabel>hostname</fieldForLabel>
       <fieldForValue>hostname</fieldForValue>
     </input>
-    <input type="dropdown" token="SSEdetectionSearch" searchWhenChanged="true">
-      <label>SSE Detection Search</label>
-      <search>
-        <query>| sseanalytics include_json=true
-| search hasSearch=Yes mitre_technique=$test_id$
-| spath input=summaries output=examples path=examples{}
-| mvexpand examples
-| spath input=examples output=example_type path=label
-| search example_type!="Demo Data"
-| spath input=examples output=search_strings path=showcase{}.value
-| table name, example_type, search_strings</query>
-        <earliest>-15m</earliest>
-        <latest>now</latest>
-      </search>
-      <fieldForLabel>name</fieldForLabel>
-      <fieldForValue>search_strings</fieldForValue>
-    </input>
-    <input type="dropdown" token="ESCUdetectionSearch" searchWhenChanged="true">
-      <label>ESCU Detection Search</label>
-      <fieldForLabel>action.escu.full_search_name</fieldForLabel>
-      <fieldForValue>search</fieldForValue>
-      <search>
-        <query>| rest /services/saved/searches | search action.escu.full_search_name=*ESCU* action.escu.search_type=detection | table action.escu.full_search_name, action.escu.mappings, action.escu.search_type, search</query>
-        <earliest>-24h@h</earliest>
-        <latest>now</latest>
-      </search>
-    </input>
-    <input type="dropdown" token="savedDetectionSearch" searchWhenChanged="true">
+    <input type="dropdown" token="detectionSearch" searchWhenChanged="true">
       <label>Other Saved Search for Detection</label>
       <fieldForLabel>title</fieldForLabel>
       <fieldForValue>search</fieldForValue>
@@ -75,114 +48,60 @@
         <latest>now</latest>
       </search>
     </input>
-    <input type="radio" token="detection_type" searchWhenChanged="true">
-      <label>Detection Type</label>
-      <choice value="sse">SSE Content</choice>
-      <choice value="escu">ESCU Content</choice>
-      <choice value="saved">Other Saved Searches</choice>
-      <initialValue>sse</initialValue>
-      <change>
-        <condition value="sse">
-          <set token="detectionSearch">$SSEdetectionSearch$</set>
-        </condition>
-        <condition value="escu">
-          <set token="detectionSearch">$ESCUdetectionSearch$</set>
-        </condition>
-        <condition value="saved">
-          <set token="detectionSearch">$savedDetectionSearch$</set>
-        </condition>
-      </change>
-    </input>
-    <input type="text" token="manual_command">
-      <label>Cmd.exe manual run</label>
-      <default>NA</default>
-      <initialValue>NA</initialValue>
-    </input>
-    <input type="text" token="manual_powershell">
-      <label>Powershell manual run</label>
-      <default>NA</default>
-      <initialValue>NA</initialValue>
-    </input>
-    <input type="text" token="scythe_campaign">
-      <label>Scythe Campaign Name</label>
-      <default>NA</default>
-      <initialValue>NA</initialValue>
-    </input>
   </fieldset>
   <row>
     <panel>
+      <title>Atomic Execution (Wait for completion)</title>
       <table>
         <search id="AdvSim_test_event">
           <finalized>
             <set token="search_id">$result.info_sid$</set>
             <set token="request_payload">$result.request_payload$</set>
           </finalized>
-          <query>| inputlookup attck_assets | search hostname="$asset$"
-| addinfo
-| eval dest=ip_address
+          <query>|  makeresults
+| eval hostname="$asset$"
+| eval action="run"
+| eval dest="$asset$"
 | eval technique_name="$tech_name$"
-| eval manual_command="$manual_command$"
-| eval manual_powershell="$manual_powershell$"
-| eval scythe_campaign="$scythe_campaign$"
-| eval action="$test_id$"
+| eval technique_id="$test_id$"
+| eval technique_test_nums="$tech_test_nums$"
 | eval request_payload=tostring(random())
 | eval playbook_name="$playbook_name$"
-| eval phantom_server="$ph_srv$"
-| fields *
-| sendalert sendtophantom param.phantom_server="$ph_srv$" param.sensitivity="amber" param.severity="low" param.sensitivity="amber" param.severity="low"</query>
+| eval ansible_server="$an_srv$"
+| sendalert ansible_invoke param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.global_account_name="AWX" param.limit="$asset$"</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
+          <progress>
+            <unset token="NOOP_1"></unset>
+          </progress>
+          <done>
+            <set token="NOOP_1">noop</set>
+          </done>
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
-        <fields>["hostname","action","dest","os","phantom_server","playbook_name","request_payload"]</fields>
+        <fields>["hostname","action","dest","os","ansible_server","playbook_name","request_payload"]</fields>
       </table>
     </panel>
   </row>
   <row>
-    <panel depends="$search_id$">
+    <panel>
+      <title>Atomic Result</title>
       <table>
-        <title>Job Status</title>
         <search>
-          <query>| rest /services/search/jobs/$search_id$/search.log | rex field=value "action=(?&lt;Run_Result&gt;.*exit code=\d{1,5})" | table Run_Result</query>
-          <earliest>$earliest$</earliest>
-          <latest>$latest$</latest>
+          <query>index=windows "Installation of Invoke-AtomicRedTeam" "T1053.005" source="WinEventLog:Microsoft-Windows-PowerShell/Operational" 
+|  rex field=Message "value=\"(?&lt;result&gt;[^\n]+)"
+| table result, Message 
+|  head 1 | $NOOP_1$</query>
+          <earliest>-10m</earliest>
+          <latest>now</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
       </table>
-    </panel>
-  </row>
-  <row>
-    <panel depends="$request_payload$">
-      <title>Phantom POST-ed Events matching GUID</title>
-      <event>
-        <search>
-          <finalized>
-            <set token="group_earliest">$result.group_earliest$</set>
-            <set token="group_latest">$result.group_latest$</set>
-          </finalized>
-          <query>| search index=* sourcetype="advsim:atr" $request_payload$
-| addinfo
-| sort _time
-| stats earliest(_time) as group_earliest latest(_time) as group_latest
-| eval group_earliest = (group_earliest - 60) | eval group_latest = (group_latest + 5)</query>
-          <earliest>$earliest$</earliest>
-          <latest>$latest$</latest>
-        </search>
-        <option name="count">20</option>
-        <option name="list.drilldown">none</option>
-        <option name="list.wrap">1</option>
-        <option name="maxLines">5</option>
-        <option name="raw.drilldown">full</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">0</option>
-        <option name="table.drilldown">all</option>
-        <option name="table.sortDirection">asc</option>
-        <option name="table.wrap">1</option>
-        <option name="type">list</option>
-      </event>
     </panel>
   </row>
   <row>
@@ -203,11 +122,16 @@
         </p>
       </html>
       <table>
-        <title>$detectionSearch$</title>
+        <title>$detectionSearch$ | $NOOP_1$</title>
         <search>
-          <query>earliest=$group_earliest$ latest=$group_latest$ $detectionSearch$</query>
+          <query>$detectionSearch$ 
+|  $NOOP_1$</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
         </search>
         <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
       </table>
     </panel>
   </row>
@@ -216,11 +140,13 @@
       <title>Olaf Rule Detect Events</title>
       <table>
         <search>
-          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ source="WinEventLog:Sysmon" RuleName=*$test_id$*
-| sort _time | table _time, EventCode, EventType, EventDescription, RuleName</query>
-          <earliest>-1d@h</earliest>
+          <query>index=windows host=$asset$ source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" RuleName=*$test_id$*
+| sort _time | table _time, EventCode, EventType, EventDescription, RuleName | $NOOP_1$</query>
+          <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="count">20</option>
         <option name="dataOverlayMode">none</option>
@@ -238,12 +164,14 @@
       <title>Sysmon Registry Events</title>
       <table>
         <search>
-          <query>earliest=$group_earliest$ latest=$group_latest$ index=* host=$asset$ source="WinEventLog:Sysmon" (EventCode=12 OR EventCode=13)
+          <query>index=windows host=$asset$ source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" (EventCode=12 OR EventCode=13)
 | sort _time
-| table _time, EventCode, EventType, Image, TargetObject,</query>
-          <earliest>-1d@h</earliest>
+| table _time, EventCode, EventType, Image, TargetObject | $NOOP_1$</query>
+          <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="count">20</option>
         <option name="dataOverlayMode">none</option>
@@ -261,14 +189,16 @@
       <title>Decoded Powershell commands from events during test time</title>
       <table>
         <search>
-          <query>| search index=* host=$asset$ earliest=$group_earliest$ latest=$group_latest$ | sort _time | rex field=CommandLine "-encodedcommand (?&lt;payload&gt;\w+)"
-| search payload=*
-| eval new_payload = payload."===="
-| base64 action=decode field=new_payload
-| eval new_payload=replace(new_payload,"\\\x00","")
-| table new_payload</query>
-          <earliest>$earliest$</earliest>
-          <latest>$latest$</latest>
+          <query>| search index=windows host=$asset$ source="WinEventLog:Microsoft-Windows-PowerShell/Operational" | rex field=_raw "HostApplication=(?&lt;host_application&gt;[^\n]+)" 
+| rex field=Message "(?&lt;base64_data&gt;.[a-zA-Z0-9]{25,1000}+={1})" 
+| eval base64_data=trim(base64_data)
+| fields _time, host, host_application, base64_data 
+| decrypt field="base64_data" b64 emit('result') 
+|  table _time, host, result | $NOOP_1$</query>
+          <earliest>-30m</earliest>
+          <latest>now</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
@@ -280,11 +210,13 @@
       <title>Cmd.exe commands from events during test time</title>
       <table>
         <search>
-          <query>| search index=* host=$asset$ earliest=$group_earliest$ latest=$group_latest$ process_parent_name=*cmd.exe* Process_Command_Line!=*-encoded*
+          <query>| search index=windows host=$asset$  process_parent_name=*cmd.exe* Process_Command_Line!=*-encoded*
 | sort _time
-| table _time, process_parent_name, Process_Command_Line</query>
-          <earliest>$earliest$</earliest>
-          <latest>$latest$</latest>
+| table _time, process_parent_name, Process_Command_Line | $NOOP_1$</query>
+          <earliest>-30m</earliest>
+          <latest>now</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
@@ -296,12 +228,14 @@
       <title>Sysmon File Create Events</title>
       <table>
         <search>
-          <query>index=* source="WinEventLog:Sysmon" host=$asset$ EventCode=11
+          <query>index=windows source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" host=$asset$ EventCode=11
 | sort _time
-| table _time, EventCode, RuleName, Image, TargetFilename, ProcessId</query>
-          <earliest>$group_earliest$</earliest>
-          <latest>$group_latest$</latest>
+| table _time, EventCode, RuleName, Image, TargetFilename, ProcessId | $NOOP_1$</query>
+          <earliest>-30m</earliest>
+          <latest>now</latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="count">20</option>
         <option name="dataOverlayMode">none</option>
@@ -319,9 +253,11 @@
       <title>All Sysmon Events</title>
       <event>
         <search>
-          <query>index=* source="WinEventLog:Sysmon" host=$asset$ | fields + *</query>
-          <earliest>$group_earliest$</earliest>
-          <latest>$group_latest$</latest>
+          <query>index=windows source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" host=$asset$ | fields + * | $NOOP_1$</query>
+          <earliest>-30m</earliest>
+          <latest>now</latest>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="count">20</option>
         <option name="list.drilldown">none</option>
@@ -342,7 +278,7 @@
       <title>Update ATTCK Board</title>
       <event>
         <search>
-          <query>| makeresults 1 | eval technique="$test_id$" | eval detected=$search_hit$ | genatklayer atkfield=technique</query>
+          <query>| makeresults 1 | eval technique="$test_id$" | eval detected=$search_hit$ | genatklayer atkfield=technique </query>
           <earliest>-60m@m</earliest>
           <latest>now</latest>
         </search>
