@@ -3,7 +3,9 @@
 **NOTE**
 ```
 This fork of SA-attck_nav is an example of possible integration with 
-other automation tools, in this case Ansible. Please also be aware this release requires TA-ansible-invoke.
+other automation tools, in this case Ansible. 
+
+Additionally also be aware this release requires TA-ansible-invoke.
 ```
 
 This repository is part of a larger [Adversary Simulation project](https://github.com/timfrazier1/AdversarySimulation).  The main page includes some installation guidance and information about other components.  Please refer there for more information. 
