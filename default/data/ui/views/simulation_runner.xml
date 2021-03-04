@@ -21,11 +21,6 @@
     </input>
     <input type="dropdown" token="an_srv">
       <label>Ansible Server</label>
-      <search>
-        <query/>
-        <earliest>-15m</earliest>
-        <latest>now</latest>
-      </search>
       <choice value="ansible-srv1.lab.lan">ansible-srv1.lab.lan</choice>
     </input>
     <input type="dropdown" token="asset" searchWhenChanged="false">
@@ -39,7 +34,7 @@
       <fieldForValue>hostname</fieldForValue>
     </input>
     <input type="dropdown" token="detectionSearch" searchWhenChanged="true">
-      <label>Other Saved Search for Detection</label>
+      <label>Saved Search for Detection</label>
       <fieldForLabel>title</fieldForLabel>
       <fieldForValue>search</fieldForValue>
       <search>
