@@ -72,7 +72,7 @@
 | eval technique_name="$tech_name$"
 | eval technique_id="$test_id$"
 | eval technique_test_nums="$tech_test_nums$"
-| eval request_payload=tostring(random())
+| eval request_id=tostring(random())
 | eval playbook_name="$playbook_name$"
 | eval ansible_server="$an_srv$"
 | eval global_account_username="$global_account_username$"
@@ -89,7 +89,7 @@
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
-        <fields>["hostname","action","dest","os","ansible_server","playbook_name","request_payload"]</fields>
+        <fields>["target","action","ansible_server","playbook_name","request_id"]</fields>
       </table>
     </panel>
   </row>
@@ -98,7 +98,7 @@
       <title>Atomic Result</title>
       <table>
         <search>
-          <query>index=windows "Installation of Invoke-AtomicRedTeam" "T1053.005" source="WinEventLog:Microsoft-Windows-PowerShell/Operational" 
+          <query>index=windows "Installation of Invoke-AtomicRedTeam" "$test_id$" source="WinEventLog:Microsoft-Windows-PowerShell/Operational" 
 |  rex field=Message "value=\"(?&lt;result&gt;[^\n]+)"
 | table result, Message 
 |  head 1 | $NOOP_1$</query>
