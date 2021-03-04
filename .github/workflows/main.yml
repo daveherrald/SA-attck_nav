@@ -1,0 +1,31 @@
+name: Releases
+
+on: 
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, e.g. v1.0, v20.15.10
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: tar -zcvf SA-attck_nav.tgz SA-attck_nav
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+    - name: Upload Release Asset
+      id: upload-code-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SA-attck_nav.tgz 
+        asset_name: SA-attck_nav.tgz 
+        asset_content_type: application/tgz  
