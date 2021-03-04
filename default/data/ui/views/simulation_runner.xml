@@ -21,7 +21,7 @@
     </input>
     <input type="dropdown" token="an_srv">
       <label>Ansible Server</label>
-      <choice value="ansible-srv1.lab.lan">ansible-srv1.lab.lan</choice>
+      <choice value="http://ansible-srv1.lab.lan">ansible-srv1.lab.lan</choice>
     </input>
     <input type="dropdown" token="asset" searchWhenChanged="false">
       <label>Asset</label>
@@ -43,6 +43,18 @@
         <latest>now</latest>
       </search>
     </input>
+    <input type="dropdown" token="global_account_username">
+      <label>Global Account Username</label>
+      <choice value="admin">admin</choice>
+    </input>
+    <input type="dropdown" token="splunk_hec_url">
+      <label>Splunk HEC Server</label>
+      <choice value="https://splk-sh1.lab.lan:8088">splk-sh1.lab.lan:8088</choice>
+    </input>
+    <input type="dropdown" token="splunk_hec_username">
+      <label>Splunk HEC Username</label>
+      <choice value="hec">hec</choice>
+    </input>
   </fieldset>
   <row>
     <panel>
@@ -54,7 +66,7 @@
             <set token="request_payload">$result.request_payload$</set>
           </finalized>
           <query>|  makeresults
-| eval hostname="$asset$"
+| eval target="$asset$"
 | eval action="run"
 | eval dest="$asset$"
 | eval technique_name="$tech_name$"
@@ -63,7 +75,8 @@
 | eval request_payload=tostring(random())
 | eval playbook_name="$playbook_name$"
 | eval ansible_server="$an_srv$"
-| sendalert ansible_invoke param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.global_account_name="AWX" param.limit="$asset$"</query>
+| eval global_account_username="$global_account_username$"
+| sendalert ansible_invoke param.request_id=request_payload param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.global_account_name="$global_account_username$" param.target="$asset$" param.awx_url="$an_srv$" param.splunk_hec_url="$splunk_hec_url$" param.splunk_hec_username="$splunk_hec_username$"</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <progress>
