@@ -1,4 +1,4 @@
 hostname,os,ip_address
-winhost01,windows,172.31.76.156
-machost01,osx,192.168.1.55
-linuxhost01,linux,192.168.1.56
+win10-dsk1.lab.lan,windows,172.16.1.101
+win16-dc1.lab.lan,linux,172.16.1.21
+win16-wef1.lab.lan,windows,172.16.1.22

@@ -13,18 +13,22 @@
       <default>0</default>
       <initialValue>0</initialValue>
     </input>
-    <input type="dropdown" token="playbook_name">
-      <label>Playbook Name</label>
-      <default>Invoke Simulation</default>
-      <choice value="Invoke Simulation">Invoke Simulation</choice>
-      <initialValue>Invoke Simulation</initialValue>
-    </input>
-    <input type="dropdown" token="an_srv">
-      <label>Ansible Server</label>
+    <input type="dropdown" token="ansible_awx_url">
+      <label>Ansible AWX Server</label>
       <choice value="http://ansible-srv1.lab.lan">ansible-srv1.lab.lan</choice>
     </input>
-    <input type="dropdown" token="asset" searchWhenChanged="false">
-      <label>Asset</label>
+    <input type="dropdown" token="ansible_awx_template">
+      <label>Ansible AWX Template</label>
+      <fieldForLabel>template</fieldForLabel>
+      <fieldForValue>template</fieldForValue>
+      <search>
+        <query>|inputlookup ansible_templates</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+    <input type="dropdown" token="ansible_awx_target" searchWhenChanged="false">
+      <label>Ansible AWX Limit</label>
       <search>
         <query>|inputlookup attck_assets</query>
         <earliest>-15m</earliest>
@@ -32,6 +36,32 @@
       </search>
       <fieldForLabel>hostname</fieldForLabel>
       <fieldForValue>hostname</fieldForValue>
+    </input>
+    <input type="dropdown" token="ansible_awx_user">
+      <label>AWX Account Username</label>
+      <fieldForLabel>title</fieldForLabel>
+      <fieldForValue>title</fieldForValue>
+      <search>
+        <query>| rest /servicesNS/nobody/TA-ansible-invoke/TA_ansible_invoke_account | table title</query>
+      </search>
+    </input>
+    <input type="dropdown" token="splunk_hec_url">
+      <label>Splunk HEC Server</label>
+      <fieldForLabel>server</fieldForLabel>
+      <fieldForValue>server_url</fieldForValue>
+      <search>
+        <query>|inputlookup splunk_hec_servers</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+    <input type="dropdown" token="splunk_hec_user">
+      <label>Splunk HEC Username</label>
+      <fieldForLabel>title</fieldForLabel>
+      <fieldForValue>title</fieldForValue>
+      <search>
+        <query>| rest /servicesNS/nobody/TA-ansible-invoke/TA_ansible_invoke_account | table title</query>
+      </search>
     </input>
     <input type="dropdown" token="detectionSearch" searchWhenChanged="true">
       <label>Saved Search for Detection</label>
@@ -42,18 +72,6 @@
         <earliest>-24h@h</earliest>
         <latest>now</latest>
       </search>
-    </input>
-    <input type="dropdown" token="global_account_username">
-      <label>Global Account Username</label>
-      <choice value="admin">admin</choice>
-    </input>
-    <input type="dropdown" token="splunk_hec_url">
-      <label>Splunk HEC Server</label>
-      <choice value="https://splk-sh1.lab.lan:8088">splk-sh1.lab.lan:8088</choice>
-    </input>
-    <input type="dropdown" token="splunk_hec_username">
-      <label>Splunk HEC Username</label>
-      <choice value="hec">hec</choice>
     </input>
   </fieldset>
   <row>
@@ -76,7 +94,7 @@
 | eval playbook_name="$playbook_name$"
 | eval ansible_server="$an_srv$"
 | eval global_account_username="$global_account_username$"
-| sendalert ansible_invoke param.request_id=request_payload param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.global_account_name="$global_account_username$" param.target="$asset$" param.awx_url="$an_srv$" param.splunk_hec_url="$splunk_hec_url$" param.splunk_hec_username="$splunk_hec_username$"</query>
+| sendalert ansible_invoke param.request_id=request_payload param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.ansible_awx_user="$ansible_awx_user$" param.ansible_awx_target="$ansible_awx_target$" param.ansible_awx_url="$ansible_awx_url$" param.splunk_hec_url="$splunk_hec_url$" param.splunk_hec_user="$splunk_hec_user$"</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <progress>
