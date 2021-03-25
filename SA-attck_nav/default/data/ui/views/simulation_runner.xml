@@ -83,26 +83,26 @@
             <set token="search_id">$result.info_sid$</set>
             <set token="request_payload">$result.request_payload$</set>
           </finalized>
-          <query>|  makeresults
-| eval target="$asset$"
-| eval action="run"
-| eval dest="$asset$"
-| eval technique_name="$tech_name$"
-| eval technique_id="$test_id$"
-| eval technique_test_nums="$tech_test_nums$"
-| eval request_id=tostring(random())
-| eval playbook_name="$playbook_name$"
-| eval ansible_server="$an_srv$"
-| eval global_account_username="$global_account_username$"
-| sendalert ansible_invoke param.request_id=request_payload param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.ansible_awx_user="$ansible_awx_user$" param.ansible_awx_target="$ansible_awx_target$" param.ansible_awx_url="$ansible_awx_url$" param.splunk_hec_url="$splunk_hec_url$" param.splunk_hec_user="$splunk_hec_user$"</query>
-          <earliest>-24h@h</earliest>
-          <latest>now</latest>
           <progress>
             <unset token="NOOP_1"></unset>
           </progress>
           <done>
             <set token="NOOP_1">noop</set>
           </done>
+          <query>|  makeresults
+| eval target="$ansible_awx_target$"
+| eval action="run"
+| eval dest="$ansible_awx_target$"
+| eval technique_name="$tech_name$"
+| eval technique_id="$test_id$"
+| eval technique_test_nums="$tech_test_nums$"
+| eval request_id=tostring(random())
+| eval playbook_name="$ansible_awx_template$"
+| eval ansible_server="$ansible_awx_url$"
+| eval awx_ansible_user="$ansible_awx_user$"
+| sendalert ansible_invoke param.request_id=request_payload param.technique_id="$test_id$" param.technique_test_numbers="$tech_test_nums$" param.ansible_awx_user="$ansible_awx_user$" param.ansible_awx_template="$ansible_awx_template$" param.ansible_awx_target="$ansible_awx_target$" param.ansible_awx_url="$ansible_awx_url$" param.splunk_hec_url="$splunk_hec_url$" param.splunk_hec_user="$splunk_hec_user$"</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
